@@ -1,0 +1,1361 @@
+/* Interface chrome for the manga edition. Art keeps its own ink and screentone;
+   controls use quieter paper surfaces and one consistent interaction language. */
+body.sty-kawaii{
+  --ui-surface:#FFFEFA;
+  --ui-soft:#F5F1E9;
+  --ui-line:#DED8CF;
+  --ui-muted:#6B626C;
+  --ui-accent:#C93757;
+  --ui-accent-soft:#FBECEF;
+  --ui-shadow:0 4px 16px rgba(35,25,38,.06), 0 1px 2px rgba(35,25,38,.04);
+  --ui-raised:0 18px 60px rgba(35,25,38,.18);
+}
+:where(body.sty-kawaii) button{
+  border:1px solid var(--ui-line); border-radius:12px;
+  background:var(--ui-surface); color:var(--ink); box-shadow:none;
+  font-weight:700; letter-spacing:0;
+  transition:background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+:where(body.sty-kawaii) button:hover{background:var(--ui-soft); color:var(--ink); border-color:#B8ADB9}
+:where(body.sty-kawaii) button:active{transform:translateY(1px); box-shadow:none}
+:where(body.sty-kawaii) button:focus-visible{outline:3px solid var(--ui-accent); outline-offset:3px}
+:where(body.sty-kawaii) button:disabled{opacity:.45; transform:none; cursor:default}
+
+/* The cover keeps the character and manga lettering, with room to breathe. */
+body.sty-kawaii .menu{background:var(--ui-soft); padding-left:20px; padding-right:20px}
+body.sty-kawaii .menu-in{gap:16px; width:min(460px,100%)}
+body.sty-kawaii .m-head{padding-bottom:44px; margin-bottom:-20px}
+body.sty-kawaii .m-head::before{background:linear-gradient(#AEA6DB, #D4BFD9 52%, #F5D6C8)}
+body.sty-kawaii .m-head::after{background:#AEA6DB}
+body.sty-kawaii .m-hills .near{fill:var(--ui-soft)}
+body.sty-kawaii .m-hills .ridge{stroke-width:1.5; stroke-opacity:.4}
+body.sty-kawaii .m-sky::after{opacity:.3}
+body.sty-kawaii .m-sign::before{opacity:.5}
+body.sty-kawaii .menu .m-title, body.sty-kawaii .m-title{
+  border-width:1.5px; border-radius:8px; padding:11px 12px 9px;
+  box-shadow:3px 3px 0 var(--ink); transform:none; background:var(--ui-surface);
+  letter-spacing:-.035em;
+}
+body.sty-kawaii .m-title::after{opacity:.25; border-radius:inherit}
+body.sty-kawaii .m-kk{color:var(--ui-accent); text-shadow:none}
+body.sty-kawaii .m-tag{
+  margin:5px 4px 0; padding:0; background:none; color:var(--ink);
+  box-shadow:none; transform:none; font-weight:700; font-size:10px; letter-spacing:.12em;
+}
+body.sty-kawaii .m-corner{
+  border:1px solid rgba(255,255,255,.65); border-radius:14px;
+  background:rgba(255,254,250,.88); box-shadow:var(--ui-shadow);
+}
+body.sty-kawaii .m-corner:hover{background:var(--ui-surface)}
+body.sty-kawaii .m-corner:active{transform:translateY(1px); box-shadow:none}
+body.sty-kawaii .parade{
+  padding:10px 10px 0; border:1px solid var(--ui-line); border-radius:20px;
+  background:var(--ui-surface); box-shadow:var(--ui-shadow);
+}
+body.sty-kawaii .p-stage{border:1px solid var(--ink); border-radius:12px}
+body.sty-kawaii .p-card{padding:0 3px; gap:11px; margin-top:12px}
+body.sty-kawaii .p-face{
+  border:1px solid var(--ui-line); border-radius:13px; background:var(--ui-soft);
+}
+body.sty-kawaii .p-who h2{font-size:21px; letter-spacing:-.035em; text-shadow:none}
+body.sty-kawaii .p-trait{
+  padding:0; margin-top:5px; background:none; color:var(--ui-accent);
+  transform:none; font-weight:700; font-size:10px; letter-spacing:.1em;
+}
+body.sty-kawaii .p-bio{padding:0 3px; color:var(--ui-muted); line-height:1.55}
+body.sty-kawaii .p-dots button{border:0; border-radius:8px; background:none; box-shadow:none}
+body.sty-kawaii .p-dots button::before{border-radius:99px; background:var(--ui-line); opacity:1; width:5px; height:5px}
+body.sty-kawaii .p-dots button[aria-current="true"]::before{background:var(--ui-accent); width:18px}
+body.sty-kawaii .m-state{
+  border:1px solid #E9DFC5; border-radius:12px; background:#F8F1DF;
+  padding:10px 12px; box-shadow:none; transform:none; margin:0;
+  font-size:12px; color:#665332;
+}
+body.sty-kawaii .m-state b, body.sty-kawaii .m-state svg{color:#80622A}
+body.sty-kawaii .m-buttons{gap:12px; padding:0 0 4px}
+body.sty-kawaii .m-buttons button{
+  border:1px solid var(--ui-line); border-radius:16px; background:var(--ui-surface);
+  box-shadow:var(--ui-shadow); transform:none;
+}
+body.sty-kawaii .m-buttons button:hover{background:#fff; border-color:#B8ADB9; box-shadow:0 5px 18px rgba(35,25,38,.1)}
+body.sty-kawaii .m-buttons button:active{transform:translateY(1px); box-shadow:none}
+body.sty-kawaii .m-buttons .go{
+  background:var(--ui-accent); color:#fff; border-color:var(--ui-accent);
+  min-height:72px; padding:13px 16px; gap:12px;
+  box-shadow:0 4px 12px rgba(201,55,87,.18);
+}
+body.sty-kawaii .m-buttons .go:hover{background:#B62D4C; border-color:#B62D4C; color:#fff}
+body.sty-kawaii .m-buttons .go::before, body.sty-kawaii .m-buttons .go::after,
+body.sty-kawaii .m-pair button::before{display:none}
+body.sty-kawaii .m-buttons .go b{
+  font:700 20px/1.15 var(--f-body); letter-spacing:-.025em; text-shadow:none;
+}
+body.sty-kawaii .m-buttons .go .m-lbl span{font-size:12px; font-weight:500; text-shadow:none}
+body.sty-kawaii .go .m-ico{
+  border:0; border-radius:12px; box-shadow:none; transform:none;
+  background:rgba(255,255,255,.16); color:#fff;
+}
+body.sty-kawaii .go .m-chev{width:18px; height:18px; filter:none; opacity:.8}
+body.sty-kawaii .m-buttons .m-pair button{min-height:80px; gap:4px}
+body.sty-kawaii .m-pair b{font:700 15px/1.2 var(--f-body); letter-spacing:-.02em; text-shadow:none}
+body.sty-kawaii .m-pair span{font-weight:500; color:var(--ui-muted)}
+body.sty-kawaii .m-pair svg{width:23px; height:23px; color:var(--ui-accent)}
+
+/* The house has a simple frame. The tray reads as a separate control surface. */
+body.sty-kawaii #app{
+  gap:8px; background:var(--ui-soft);
+  padding:max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 0 max(10px, env(safe-area-inset-left));
+}
+body.sty-kawaii .bar{
+  padding:5px 8px; border:1px solid var(--ui-line); border-radius:16px;
+  background:var(--ui-surface); box-shadow:none; gap:8px;
+}
+body.sty-kawaii .lockup{border-radius:10px}
+body.sty-kawaii h1{text-shadow:none; font-size:17px; letter-spacing:-.04em}
+body.sty-kawaii .sub{color:var(--ui-muted); font-weight:700; letter-spacing:.03em}
+body.sty-kawaii .lk-back{color:var(--ui-muted)}
+body.sty-kawaii .tools{gap:6px}
+body.sty-kawaii .tools button, body.sty-kawaii #hintBtn{
+  height:44px; min-width:44px; padding:0 11px; justify-content:center;
+  border:1px solid var(--ui-line); border-radius:12px;
+  background:var(--ui-soft); box-shadow:none; transform:none; color:var(--ink);
+  font:700 12px var(--f-body);
+}
+body.sty-kawaii #hintBtn{background:#FFF1CC; border-color:#EBDCB4}
+body.sty-kawaii #hintBtn::before, body.sty-kawaii #hintBtn::after{display:none}
+body.sty-kawaii .tools button:hover{background:#ECE6DD}
+body.sty-kawaii .tools button:active, body.sty-kawaii #hintBtn:active{transform:translateY(1px)}
+body.sty-kawaii #soundBtn[aria-pressed="true"]{background:var(--ui-accent-soft); color:var(--ui-accent); border-color:#EBC0CB}
+body.sty-kawaii .icobtn svg{width:18px; height:18px}
+body.sty-kawaii .count{font:700 12px var(--f-body); color:var(--ui-muted)}
+body.sty-kawaii .mg-panel::before{display:none}
+body.sty-kawaii .mg-pin{padding:1px; border-radius:18px; overflow:hidden; background:var(--ui-line)}
+body.sty-kawaii .mg-p-stage .mg-pin, body.sty-kawaii .mg-p-stage #stage,
+body.sty-kawaii .mg-p-tray .mg-pin, body.sty-kawaii .mg-p-tray .finds{clip-path:none}
+body.sty-kawaii .mg-p-tray{margin-top:0}
+body.sty-kawaii .finds{background:var(--ui-surface); border:0; padding:11px 10px 10px; gap:9px}
+body.sty-kawaii .tr-prog{color:var(--ui-muted); letter-spacing:.06em}
+body.sty-kawaii .tr-bonus{border-left:1px solid var(--ui-line)}
+body.sty-kawaii .tr-cnt.full b{background:var(--ui-accent-soft); color:var(--ui-accent); box-shadow:none; border-radius:5px; padding:2px 4px}
+body.sty-kawaii .tr-track{height:8px; gap:3px}
+body.sty-kawaii .tr-track i{border:1px solid #D5CDC2; border-radius:3px; background:var(--ui-soft)}
+body.sty-kawaii .tr-track i.on{border-color:var(--ink)}
+body.sty-kawaii .chip, body.sty-kawaii .kc{
+  border:1px solid var(--ui-line); border-radius:10px; box-shadow:none;
+  background-color:var(--ui-soft);
+}
+body.sty-kawaii .chip:hover{background-color:#ECE6DD}
+body.sty-kawaii .kc:hover{border-color:var(--ui-accent)}
+body.sty-kawaii .chip:active, body.sty-kawaii .kc:active{transform:translateY(1px); box-shadow:none}
+body.sty-kawaii .kc.sel, body.sty-kawaii .chip.sel{border-color:var(--ui-accent); box-shadow:0 0 0 2px var(--ui-accent)}
+body.sty-kawaii .kn{background:var(--ui-surface); color:var(--ink); font-weight:700; height:17px; line-height:17px}
+body.sty-kawaii .kc.sel .kn{background:var(--ui-accent-soft); color:var(--ui-accent)}
+body.sty-kawaii .kb{border:1px solid var(--ui-line)}
+body.sty-kawaii .kc.big .kw, body.sty-kawaii .kh .kw{border-right-width:1px}
+body.sty-kawaii .kc.kh, body.sty-kawaii .kc.kh:active{box-shadow:none}
+body.sty-kawaii .kacts button{border:0; border-radius:8px; box-shadow:none}
+body.sty-kawaii .kacts button:hover{background:#F1B531}
+body.sty-kawaii .chip .n i{border-width:1px; border-color:#9F949D; border-radius:2px}
+body.sty-kawaii .chip.got{border-color:#E6C377; background-color:#FFF1CC}
+body.sty-kawaii .chip .tk{border:1px solid #fff}
+body.sty-kawaii #adslot{
+  border-top:1px solid var(--ui-line); background:var(--ui-soft); margin:0 -10px;
+}
+
+/* Panels, profiles, and results share the same paper card system. */
+body.sty-kawaii .overlay, body.sty-kawaii .sheet{background:rgba(29,23,34,.36)}
+body.sty-kawaii .overlay{padding-top:max(20px, env(safe-area-inset-top))}
+body.sty-kawaii .card, body.sty-kawaii .card.pnl{
+  position:relative; background:var(--ui-surface); border:1px solid var(--ui-line);
+  border-radius:24px; box-shadow:var(--ui-raised); padding:26px;
+  max-height:calc(100dvh - 40px - var(--ad-foot) - env(safe-area-inset-top));
+  overscroll-behavior:contain; overflow-x:hidden; scrollbar-width:thin; scrollbar-color:var(--ui-line) transparent;
+}
+body.sty-kawaii .card h2{font-size:25px; letter-spacing:-.04em; line-height:1.25; text-shadow:none}
+body.sty-kawaii .card .eyebrow{color:var(--ui-accent); font-weight:700; letter-spacing:.12em; padding-right:32px}
+body.sty-kawaii .card .lede{margin:10px 0 20px; font-size:13px; color:var(--ui-muted); line-height:1.6}
+body.sty-kawaii .pnl h3{font:700 15px/1.3 var(--f-body); margin-top:22px}
+body.sty-kawaii .pnl p{color:var(--ui-muted)}
+body.sty-kawaii .pnl .cardrow button, body.sty-kawaii .pnl p > button,
+body.sty-kawaii .cardrow button, body.sty-kawaii .sheet-in button.wide{
+  border:1px solid var(--ui-line); border-radius:12px; min-height:48px;
+  font-weight:700; justify-content:center; box-shadow:none;
+}
+body.sty-kawaii .primary{background:var(--ink); color:#fff; border-color:var(--ink)}
+body.sty-kawaii .primary:hover{background:#382B3F; border-color:#382B3F; color:#fff}
+body.sty-kawaii .panel-dismiss{
+  position:absolute; top:16px; right:16px; min-width:44px; min-height:44px;
+  width:44px; height:44px; padding:0; display:grid; place-items:center;
+  border:0; border-radius:50%; background:var(--ui-soft); box-shadow:none; color:var(--ui-muted);
+}
+.panel-dismiss svg{width:18px; height:18px}
+body.sty-kawaii .sheet{padding-top:max(20px, env(safe-area-inset-top))}
+body.sty-kawaii .sheet-in{
+  background:var(--ui-surface); border:1px solid var(--ui-line); border-bottom:0;
+  border-radius:24px 24px 0 0; box-shadow:var(--ui-raised); padding:14px 24px calc(24px + env(safe-area-inset-bottom));
+  scrollbar-width:thin; scrollbar-color:var(--ui-line) transparent;
+  max-height:calc(100dvh - 28px - var(--ad-clear) - env(safe-area-inset-top));
+}
+body.sty-kawaii .sheet-in::before{content:""; display:block; width:36px; height:4px; border-radius:99px; background:var(--ui-line); margin:0 auto 22px}
+body.sty-kawaii .hint-h{font-size:23px; letter-spacing:-.04em}
+body.sty-kawaii .hint-p{color:var(--ui-muted); line-height:1.6}
+body.sty-kawaii .cface, body.sty-kawaii .cface.got{border:1px solid var(--ui-line); border-radius:14px; background:var(--ui-soft)}
+body.sty-kawaii .cwho h3{font-size:20px; letter-spacing:-.035em}
+body.sty-kawaii .ctrait{color:var(--ui-accent); font-weight:700; font-size:10px; letter-spacing:.08em}
+body.sty-kawaii .cstate{border:1px solid var(--ui-line); background:var(--ui-soft); color:var(--ui-muted); letter-spacing:.04em; padding:5px 8px}
+body.sty-kawaii .cstate.in{background:#EDF3E7; border-color:#D1DFC6; color:#476239}
+body.sty-kawaii .cbio{font-size:14px; line-height:1.6}
+body.sty-kawaii .cfacts{border:1px solid var(--ui-line); border-radius:14px; overflow:hidden; background:var(--ui-soft); gap:0}
+body.sty-kawaii .cfacts dt, body.sty-kawaii .cfacts dd{background:var(--ui-soft); padding-left:14px; padding-right:14px}
+body.sty-kawaii .cfacts dt{padding-top:12px; color:var(--ui-muted); font-weight:700; letter-spacing:.08em}
+body.sty-kawaii .cfacts dd{padding-bottom:12px; line-height:1.5}
+body.sty-kawaii .discovery{border:1px solid #EBC0CB; border-radius:14px; background:var(--ui-accent-soft); padding:12px 14px}
+body.sty-kawaii .discovery b{color:var(--ui-accent); font-weight:700; letter-spacing:.08em}
+body.sty-kawaii .discovery p{line-height:1.55}
+body.sty-kawaii .discovery.locked{border:1px dashed var(--ui-line); background:var(--ui-soft)}
+body.sty-kawaii .discovery.locked b, body.sty-kawaii .discovery.locked p{color:var(--ui-muted)}
+body.sty-kawaii .bookgrid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+body.sty-kawaii .bookcat, body.sty-kawaii .pnl .bookcat{
+  min-width:0; min-height:112px; gap:7px; padding:12px 5px;
+  border:1px solid var(--ui-line); border-radius:15px; background:var(--ui-soft); box-shadow:none;
+}
+body.sty-kawaii .bookcat.known{background:var(--ui-accent-soft); border-color:#EBC0CB}
+body.sty-kawaii .bookcat:hover{border-color:var(--ui-accent); background:#F8E0E6}
+body.sty-kawaii .bookcat .bf{width:46px; height:41px}
+body.sty-kawaii .bookcat:not(.known) .bf{opacity:.55}
+body.sty-kawaii .bookcat b{font-size:12px; font-weight:700}
+body.sty-kawaii .bookcat i{font:700 11px var(--f-body); color:var(--ui-muted)}
+body.sty-kawaii .bookcat.done i{color:var(--ui-accent)}
+body.sty-kawaii .board, body.sty-kawaii .pnl dl{
+  border:1px solid var(--ui-line); border-radius:14px; gap:1px; background:var(--ui-line);
+}
+body.sty-kawaii .board li{background:var(--ui-surface); padding:12px}
+body.sty-kawaii .board li.me{background:var(--ui-accent-soft)}
+body.sty-kawaii .board li.me b{color:var(--ui-accent)}
+body.sty-kawaii .pnl dt, body.sty-kawaii .pnl dd{background:var(--ui-soft); padding:11px 12px}
+body.sty-kawaii .namerow input{
+  border:1px solid var(--ui-line); border-radius:12px; background:var(--ui-soft); font-weight:500; padding:12px;
+}
+body.sty-kawaii .namerow input:focus{outline:2px solid var(--ui-accent); outline-offset:2px}
+body.sty-kawaii .namerow button{border-radius:12px; min-height:48px}
+body.sty-kawaii .tallies{gap:14px 8px; padding:12px 0}
+body.sty-kawaii .stats{border:0; gap:8px; background:none}
+body.sty-kawaii .stat{background:var(--ui-soft); border:1px solid var(--ui-line); border-radius:12px; padding:12px 6px}
+body.sty-kawaii .stat b{font:700 19px/1.2 var(--f-body); margin-bottom:5px}
+body.sty-kawaii .stat span{font-size:10px; letter-spacing:.04em}
+body.sty-kawaii .streak-ribbon{border-left:3px solid var(--ui-accent); background:var(--ui-accent-soft); border-radius:0 10px 10px 0}
+body.sty-kawaii .fp-card{
+  border:1.5px solid var(--ink); border-radius:20px; box-shadow:var(--ui-raised);
+  clip-path:none; background:var(--ui-surface);
+}
+body.sty-kawaii .fp-name{text-shadow:none}
+body.sty-kawaii .fp-unlock{border:1px solid #E9DFC5; border-radius:12px; background:#F8F1DF}
+body.sty-kawaii .all-home .ah-in{border:1px solid var(--ui-line); border-radius:20px; box-shadow:var(--ui-shadow)}
+body.sty-kawaii .quip{bottom:16px; border:1px solid var(--ui-line); border-radius:18px; box-shadow:var(--ui-raised)}
+body.sty-kawaii .quip-pic{border:1px solid var(--ui-line); border-radius:12px; background:var(--ui-soft)}
+body.sty-kawaii .toast{border:0; border-radius:12px; background:var(--ink); color:#fff; box-shadow:var(--ui-shadow); padding:10px 16px; font-weight:700; max-width:calc(100% - 24px); white-space:normal; text-align:center}
+body.sty-kawaii .clue{border-width:1.5px; box-shadow:var(--ui-raised)}
+body.sty-kawaii .clue::after{border-width:1.5px}
+body.sty-kawaii .clue button, body.sty-kawaii .clue button.alt{border:1px solid var(--ui-line); border-radius:10px; box-shadow:none; min-height:44px; height:auto}
+body.sty-kawaii .clue button:hover{background:#F6E3B0}
+body.sty-kawaii .clue button.alt:hover{background:var(--ui-soft)}
+
+@media (max-width:620px){
+  body.sty-kawaii .bar{padding:4px 6px}
+  body.sty-kawaii .tools{gap:4px}
+  body.sty-kawaii .tools button, body.sty-kawaii #hintBtn{padding:0; width:44px}
+  body.sty-kawaii .card, body.sty-kawaii .card.pnl{padding:24px 20px 20px}
+  body.sty-kawaii .sheet-in{padding-left:20px; padding-right:20px}
+}
+@media (max-width:360px){
+  body.sty-kawaii .menu{padding-left:14px; padding-right:14px}
+  body.sty-kawaii .lockup{gap:3px}
+  body.sty-kawaii .mark{width:28px}
+  body.sty-kawaii .bookgrid{gap:7px}
+  body.sty-kawaii .bookcat b{font-size:11px}
+  body.sty-kawaii .card h2{font-size:22px}
+  body.sty-kawaii .cardrow{flex-wrap:wrap}
+}
+@media (max-height:700px){
+  body.sty-kawaii .menu-in{gap:10px}
+  body.sty-kawaii .m-buttons .go{min-height:60px; padding-top:9px; padding-bottom:9px}
+  body.sty-kawaii .m-buttons .m-pair button{min-height:66px}
+}
+@media (prefers-reduced-motion:reduce){
+  :where(body.sty-kawaii) button{transition:none}
+  body.sty-kawaii .sheet-in{animation:none}
+}
+/* Leave the profile's header clear of the close control and the grab handle. */
+body.sty-kawaii .sheet-in{position:relative}
+body.sty-kawaii .sheet-in .panel-dismiss{top:6px; right:8px; width:44px; height:44px; background:transparent}
+/* Keep the cover rays within the viewport on narrow phones. */
+body.sty-kawaii .m-sign::before{width:min(470px,100vw); margin-left:calc(-.5 * min(470px,100vw))}
+
+/* Character cards: a reference portrait, with the face on a quiet coat tint. */
+body.sty-kawaii .kw{background:color-mix(in srgb, var(--cat-coat,#D8CEC3) 22%, var(--ui-surface))}
+body.sty-kawaii .kw::before{display:none}
+body.sty-kawaii .kc.chip .kw svg{width:85%; max-width:48px; bottom:-1px}
+body.sty-kawaii .kc.tall .kw svg{width:96%; max-width:86px}
+body.sty-kawaii .kc.big .kw{width:78px}
+body.sty-kawaii .kc.big .kw svg{width:96%}
+body.sty-kawaii .kc.got .kw{background:#EDF3E7}
+body.sty-kawaii .kc.got .kn{background:#EDF3E7; color:#476239}
+body.sty-kawaii .kc.sel .kw{background:var(--ui-accent-soft)}
+body.sty-kawaii .kh .kw{background:color-mix(in srgb, var(--cat-coat,#D8CEC3) 22%, var(--ui-surface))}
+body.sty-kawaii .ktr{border-radius:6px; transform:none; background:var(--ui-accent-soft); color:var(--ui-accent); padding:4px 7px}
+body.sty-kawaii .kburst{display:none}
+body.sty-kawaii .kb{left:3px; top:3px; background:var(--ui-surface); border-color:#CEC5BA; opacity:.85}
+body.sty-kawaii .p-face{width:54px; height:54px; padding:3px}
+body.sty-kawaii .cface{width:72px; height:72px; padding:5px}
+body.sty-kawaii .chead{gap:12px; flex-wrap:wrap; margin-bottom:16px}
+body.sty-kawaii .cwho{min-width:130px}
+body.sty-kawaii .cstate{margin-left:auto}
+body.sty-kawaii .bookcat, body.sty-kawaii .pnl .bookcat{min-height:144px; padding:12px 5px; gap:6px}
+body.sty-kawaii .bookcat .bf{display:grid; place-items:center; width:66px; height:66px; padding:4px; border-radius:50%; background:var(--ui-surface)}
+body.sty-kawaii .bookcat:not(.known) .bf{opacity:.8}
+body.sty-kawaii .bookcat b{font-size:12px; letter-spacing:-.02em}
+body.sty-kawaii .bookcat i{font-size:10px; font-weight:500}
+.book-progress{display:flex; gap:3px; justify-content:center; margin:2px 0 0; width:40px}
+.book-progress span{height:3px; flex:1; border-radius:99px; background:#DAD1C8}
+.book-progress span.on{background:var(--ui-accent)}
+body.sty-kawaii .fp-card{padding:18px 20px 20px}
+body.sty-kawaii .fp-kicker{color:var(--ui-accent); font:700 10px var(--f-body); letter-spacing:.12em}
+body.sty-kawaii .fp-count{font:700 12px var(--f-body); color:var(--ui-muted)}
+body.sty-kawaii .fp-body::before{opacity:.16}
+body.sty-kawaii .fp-cat{filter:none}
+body.sty-kawaii .fp-sub{color:var(--ui-muted); font-weight:500; margin-top:7px}
+body.sty-kawaii #paradeSvg .p-art{filter:none}
+/* Portrait fills are muted into the room's palette during the search. */
+body.sty-kawaii #world .h-coat{fill:color-mix(in srgb, var(--coat) var(--wash), var(--host))}
+body.sty-kawaii #world .h-marking, body.sty-kawaii #world .h-marking path{fill:color-mix(in srgb, var(--mark,var(--coat)) var(--wash), var(--host))}
+body.sty-kawaii #world .h-muzzle{fill:color-mix(in srgb, #FFF7E8 var(--wash), var(--host))}
+body.sty-kawaii #world .h-ear{fill:color-mix(in srgb, #EBA3A4 var(--wash), var(--host))}
+body.sty-kawaii #world .h-blush{opacity:.2}
+body.sty-kawaii #world .h-shade{opacity:.4}
+.ink-sh .h-detail, .ink-sh .h-blush, .tn .h-detail, .tn .h-blush, .mk .h-detail, .mk .h-blush{display:none}
+@media (max-width:360px){
+  body.sty-kawaii .bookcat .bf{width:58px; height:58px}
+  body.sty-kawaii .bookcat, body.sty-kawaii .pnl .bookcat{min-height:136px}
+  body.sty-kawaii .kc.chip .kn{font-size:10px}
+  body.sty-kawaii .cface{width:62px; height:62px}
+}
+/* Fit the entire portrait rather than cropping the ears in the two-row list. */
+body.sty-kawaii .kz{height:132px}
+body.sty-kawaii .kc.chip .kw svg{height:100%; width:100%; max-width:none; bottom:0}
+body.sty-kawaii .bookcat{position:relative}
+.book-rare{position:absolute; right:7px; top:5px; color:#9B7733; font-size:14px}
+@media (max-height:450px){
+  body.sty-kawaii .kz{height:64px}
+}
+
+/* Room finishes have colour and depth even when the camera is pulled back. */
+body.sty-kawaii #world .tree-bark{fill:#A7754D}
+body.sty-kawaii .tn .tree-bark{fill:#795337 !important}
+/* A varied household, drawn with flat fills and the existing walking rig. */
+body.sty-kawaii #world .folk .fk-skin{fill:var(--fk-skin)}
+body.sty-kawaii #world .folk .fk-hair{fill:var(--fk-hair); stroke-width:1.4}
+body.sty-kawaii #world .folk .fk-shirt{fill:var(--fk-shirt)}
+body.sty-kawaii #world .folk .fk-leg{fill:none; stroke:var(--fk-trousers); stroke-width:6}
+body.sty-kawaii #world .folk .fk-shoe{fill:none; stroke:#51454E; stroke-width:4}
+body.sty-kawaii #world .folk .fk-arm{fill:none; stroke:var(--fk-shirt); stroke-width:4}
+body.sty-kawaii #world .folk .fk-cap{fill:var(--fk-trousers)}
+body.sty-kawaii #world .folk .fk-pack{fill:#BE9470}
+body.sty-kawaii #world .folk .fk-prop{fill:#E7CCA4; stroke-width:1.6}
+body.sty-kawaii #world .folk .fk-shorts{fill:var(--fk-trousers)}
+body.sty-kawaii #world .folk-shorts .fk-shin{stroke:var(--fk-skin)}
+/* Chibi proportions, inked lashes and comic expressions stay readable when
+   small. All detail is flat vector art, with no extra animation or filters. */
+body.sty-kawaii #world .folk .fk-head{stroke-width:1.35}
+body.sty-kawaii #world .folk .fk-hair{stroke-width:1.35}
+body.sty-kawaii #world .folk .fk-face-line{fill:none; stroke:#292331; stroke-width:1.35}
+body.sty-kawaii #world .folk .fk-eye-white{fill:#FFFEFB; stroke:#292331; stroke-width:.8}
+body.sty-kawaii #world .folk .fk-iris{stroke:#292331; stroke-width:.55}
+body.sty-kawaii #world .folk .fk-pupil{fill:#292331; stroke:#292331; stroke-width:1}
+body.sty-kawaii #world .folk .fk-eye-shine{fill:#FFFEFB; stroke:none}
+body.sty-kawaii #world .folk .fk-mouth{fill:#614050; stroke:#292331; stroke-width:1}
+body.sty-kawaii #world .folk .fk-face-shadow{fill:#754743; opacity:.13; stroke:none}
+body.sty-kawaii #world .folk .fk-blush{fill:none; stroke:#D58C83; stroke-width:1.1}
+body.sty-kawaii #world .folk .fk-glasses{fill:none; stroke:#5A465B; stroke-width:1.4}
+body.sty-kawaii #world .folk .fk-sweat{fill:#B7DCEA; stroke:#62798B; stroke-width:.8}
+body.sty-kawaii #world .folk .fk-cloth-light{fill:#FFF4DD; stroke-width:.8}
+body.sty-kawaii #world .folk .fk-cloth-detail{fill:none; stroke:#4C4153; stroke-width:.9}
+body.sty-kawaii #world .folk .fk-ribbon{fill:var(--fk-accent,#D6A15D); stroke:#66505F; stroke-width:.9}
+body.sty-kawaii #world .folk .fk-flower{fill:#F4D987; stroke:#816856; stroke-width:.8}
+body.sty-kawaii #world .folk .fk-apron{fill:#DFD8B9; stroke-width:1}
+body.sty-kawaii #world .folk .fk-boot{fill:#64546D; stroke:#342D39; stroke-width:1}
+body.sty-kawaii #world .folk .fk-arm{stroke-width:5}
+body.sty-kawaii #world .folk .fk-leg{stroke-width:7}
+body.sty-kawaii #world .folk .fk-skin{stroke-width:1}
+
+/* A warm tiled roof, with simple solid colours at the distant overview. */
+body.sty-kawaii #world .house-roof{stroke:#65515B; stroke-width:2.2}
+body.sty-kawaii #world .roof-face{fill:url(#roofTiles)}
+body.sty-kawaii #world .roof-hip{fill:#AA7160}
+body.sty-kawaii #world .roof-hip.right{fill:#976653}
+body.sty-kawaii #world .roof-ridge{fill:#D5A08A}
+body.sty-kawaii #world .roof-fascia{fill:#F1DDC5}
+body.sty-kawaii #world .roof-gutter{fill:none; stroke:#735D61; stroke-width:4}
+body.sty-kawaii #world .roof-window-frame{fill:#F4E6D4}
+body.sty-kawaii #world .roof-window-glass{fill:#BBDAD9; stroke:#7C999E; stroke-width:1.5}
+body.sty-kawaii #world .roof-window-glint{fill:none; stroke:#F1FBF7; stroke-width:3; stroke-opacity:.8}
+body.sty-kawaii #world .roof-chimney{fill:#CBA38A}
+body.sty-kawaii #world .roof-chimney-side{fill:#A37B68; stroke:none}
+body.sty-kawaii #world .roof-bricks{fill:none; stroke:#986F61; stroke-width:1.4}
+body.sty-kawaii #world .roof-cap{fill:#F0DBC3}
+body.sty-kawaii #stage[data-lod="far"] .roof-face{fill:#BA8069}
+body.sty-kawaii #stage[data-lod="far"] .roof-bricks,
+body.sty-kawaii #stage[data-lod="far"] .roof-window-glint{visibility:hidden}
+
+body.sty-kawaii #world .room .dp-back{fill:var(--room-wall-surface)}
+body.sty-kawaii #world .room .dp-side{fill:var(--room-side); stroke:var(--room-side)}
+body.sty-kawaii #world .room .dp-ceil{fill:var(--room-ceiling); stroke:var(--room-ceiling)}
+body.sty-kawaii #world .room .dp-floor{fill:var(--room-floor-surface)}
+body.sty-kawaii #world .room .dp{stroke-width:1.1; stroke-opacity:.45}
+body.sty-kawaii #world .room-panels{stroke:#A59898; stroke-width:1; stroke-opacity:.35}
+body.sty-kawaii #world .room-trim{fill:var(--room-trim); stroke:#9F9196; stroke-width:.7; stroke-opacity:.3}
+body.sty-kawaii #world .room-cornice{stroke:var(--room-trim); stroke-width:3}
+body.sty-kawaii #world .room-contact{fill:#473747; stroke:none; opacity:.11}
+body.sty-kawaii #world .ish{opacity:.38}
+body.sty-kawaii #world .tnu{opacity:.55}
+body.sty-kawaii #world .gl{opacity:.55}
+body.sty-kawaii #stage[data-lod="far"] .room .dp-back{fill:var(--room-wall)}
+body.sty-kawaii #stage[data-lod="far"] .room .dp-floor{fill:var(--room-floor)}
+/* Fine detail is unnecessary in the overview. Visibility keeps SVG resources
+   mounted, so crossing the zoom threshold does not rebuild them. */
+body.sty-kawaii #stage[data-lod="far"] .room-panels,
+body.sty-kawaii #stage[data-lod="far"] .room-cornice,
+body.sty-kawaii #stage[data-lod="far"] .room-contact{visibility:hidden}
+
+/* Discovery: a warm portrait spotlight and a small, readable sense of progress. */
+body.sty-kawaii .fp-card{width:min(318px,100%); border:1px solid var(--ui-line); box-shadow:0 18px 56px rgba(35,25,38,.2)}
+body.sty-kawaii .fp-kicker{color:#476239; display:flex; align-items:center; gap:6px}
+body.sty-kawaii .fp-kicker::before{content:"✓"; display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:#EDF3E7; font-size:12px; letter-spacing:0}
+body.sty-kawaii .fp-body{min-height:140px; margin:8px 0 12px}
+body.sty-kawaii .fp-body::before{inset:6px 38px; border:1px solid color-mix(in srgb, var(--found-coat) 40%, #DED8CF); border-radius:50%; background:color-mix(in srgb, var(--found-coat) 16%, #FFFEFA); opacity:1; mask-image:none; -webkit-mask-image:none}
+body.sty-kawaii .fp-name{font-size:25px; letter-spacing:-.04em}
+.fp-progress{display:flex; gap:4px; height:5px; margin:18px auto 0; max-width:164px}
+.fp-progress span{flex:1; min-width:0; border-radius:99px; background:#E8E1D7}
+.fp-progress span.on{background:#8AA576}
+body.sty-kawaii .fp-unlock{margin:14px 0 0; background:#F8F1DF; padding:10px 12px}
+body.sty-kawaii .fp-unlock b{font-weight:700; color:#80622A}
+body.sty-kawaii .all-home .ah-in{width:min(350px,calc(100% - 40px)); padding:24px; border-radius:24px; background:var(--ui-surface); box-shadow:var(--ui-raised)}
+body.sty-kawaii .ah-faces{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; max-width:260px; margin:auto}
+body.sty-kawaii .ah-faces span{width:100%; height:68px; padding:7px; border-radius:16px; background:var(--ui-soft)}
+body.sty-kawaii .all-home p{font-size:21px; margin-top:20px; line-height:1.3; letter-spacing:-.04em}
+body.sty-kawaii .all-home .ah-cue{margin:10px 0 0; color:var(--ui-muted); font:500 12px var(--f-body); letter-spacing:0}
+body.sty-kawaii .all-home .ah-cue::before, body.sty-kawaii .all-home .ah-cue::after{display:none}
+
+/* Results put the household and the next action first; each cat's note opens below. */
+body.sty-kawaii .result-card h2{padding-right:26px}
+body.sty-kawaii .result-card .lede{margin-bottom:14px}
+.result-home{display:flex; align-items:center; gap:7px; color:#476239; font-size:12px; margin:0 0 12px}
+.result-home>span{width:20px; height:20px; background:#EDF3E7; display:grid; place-items:center; border-radius:50%}
+.result-cast{display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); gap:3px; margin-bottom:18px}
+.result-cast>span{display:block; min-width:0; aspect-ratio:1; padding:2px; border-radius:10px; background:var(--ui-soft)}
+.result-cast svg{width:100%; height:100%; display:block}
+body.sty-kawaii .result-card .streak-ribbon{font-size:12px; font-weight:500; line-height:1.55; padding:12px}
+.result-notes{margin:18px 0 14px; border:1px solid var(--ui-line); border-radius:14px; overflow:hidden}
+.result-notes summary{display:flex; align-items:center; gap:8px; padding:14px 12px; font-size:12px; font-weight:700; cursor:pointer; list-style:none}
+.result-notes summary::-webkit-details-marker{display:none}
+.result-notes summary span{margin-left:auto; color:var(--ui-muted); font-size:10px; font-weight:500; white-space:nowrap}
+.result-notes summary::after{content:"⌄"; color:var(--ui-muted); font-size:17px}
+.result-notes[open] summary::after{transform:rotate(180deg)}
+.result-notes summary:focus-visible{outline:3px solid var(--ui-accent); outline-offset:-3px; border-radius:12px}
+.result-notes .roll{padding:0 12px 14px; margin:0; gap:12px}
+.result-notes .vface{width:40px; height:40px; padding:3px; background:var(--ui-soft); border-radius:10px}
+body.sty-kawaii .result-card .grid{font-size:15px; letter-spacing:2px; text-align:center; margin-bottom:12px; overflow-wrap:anywhere}
+body.sty-kawaii .result-card .more{border-radius:12px; border-color:var(--ui-line); min-height:48px; color:var(--ui-muted); font-size:12px; margin-bottom:12px}
+body.sty-kawaii .result-actions{display:grid; grid-template-columns:1fr 1fr; gap:8px; position:sticky; bottom:-26px; padding:14px 0 0; background:var(--ui-surface); border-top:1px solid var(--ui-line)}
+body.sty-kawaii .result-actions .primary{background:var(--ui-accent); border-color:var(--ui-accent); color:#fff}
+body.sty-kawaii .result-actions .primary:hover{background:#B62D4C; border-color:#B62D4C}
+body.sty-kawaii .result-actions .result-menu{grid-column:1/-1; border:0; background:var(--ui-soft); color:var(--ui-muted)}
+@media(max-width:620px){body.sty-kawaii .result-actions{bottom:-20px}}
+@media(max-height:450px){
+  body.sty-kawaii .all-home .ah-in{padding:16px; width:min(460px,calc(100% - 40px))}
+  body.sty-kawaii .ah-faces{grid-template-columns:repeat(5,minmax(0,1fr)); max-width:360px; gap:6px}
+  body.sty-kawaii .ah-faces span{height:48px}
+}
+@media(prefers-reduced-motion:reduce){.result-notes summary::after{transition:none}}
+.result-cast{grid-template-columns:repeat(var(--cast-count,9),minmax(0,1fr))}
+
+/* Cute adult silhouettes use static paths on the same walking rig. */
+body.sty-kawaii #world .folk .fk-skirt,
+body.sty-kawaii #world .folk .fk-pinafore{fill:var(--fk-trousers); stroke-width:1.2}
+body.sty-kawaii #world .folk .fk-leaf{fill:#98AE7E; stroke-width:.8}
+body.sty-kawaii #world .folk-woman .fk-flower{fill:var(--fk-accent,#F4D987)}
+
+/* Adult manga proportions: fitted clothing, inked eyes and longer legs. */
+body.sty-kawaii #world .folk-woman .fk-arm{stroke-width:3.6}
+body.sty-kawaii #world .folk-woman .fk-leg{stroke-width:5.2}
+body.sty-kawaii #world .folk-barelegs .fk-leg{stroke:var(--fk-skin)}
+body.sty-kawaii #world .folk-woman .fk-lashes{fill:none;stroke:#292331;stroke-width:2}
+body.sty-kawaii #world .folk-woman .fk-lips{fill:#C66C83;stroke:#925367;stroke-width:.7}
+body.sty-kawaii #world .folk-woman .fk-earring{fill:var(--fk-accent,#D7B473);stroke:#81624D;stroke-width:.6}
+body.sty-kawaii #world .folk-woman .fk-hair-shine{fill:none;stroke:#FFFFFF;opacity:.33;stroke-width:2.3}
+body.sty-kawaii #world .folk-woman .fk-boot{fill:#665068;stroke-width:.8}
+
+/* Park landmarks use the same static SVG symbol pipeline. */
+body.sty-kawaii #world .park-grass{fill:none;stroke:#829A6F;stroke-width:2}
+body.sty-kawaii #world .park-stone{fill:#D6CEBE}
+body.sty-kawaii #world .park-water{fill:#A7D2D1}
+body.sty-kawaii #world .park-timber{fill:#B88D68}
+body.sty-kawaii #world .park-cloth{fill:#EAB4B6}
+body.sty-kawaii #world .park-play{fill:#D6AD79}
+body.sty-kawaii #world .park-leaves{fill:#8FAA80}
+body.sty-kawaii #world .park-petals{fill:#E5AEC3}
+body.sty-kawaii #world .park-sign{fill:#F0DFC0}
+
+/* One open park, with paths connecting its landmarks. */
+body.sty-kawaii #world .park-lawn{fill:#CFDFB5;stroke:none}
+body.sty-kawaii #world .park-winding{fill:none;stroke:#EDDABB;stroke-width:110;stroke-linecap:round}
+body.sty-kawaii #world .park-winding.branch{stroke-width:65}
+body.sty-kawaii #world .park-pond-bank{fill:#A9BC87;stroke:none}
+body.sty-kawaii #world .park-pond-water{fill:#A8D6D1;stroke:#789E93;stroke-width:2}
+body.sty-kawaii #world .park-ripple{fill:none;stroke:#DDF3E5;stroke-width:5;stroke-linecap:round}
+body.sty-kawaii #world .park-play-sand{fill:#E9D8AD;stroke:#CAB787;stroke-width:1.5}
+
+body.sty-kawaii #world .folk-woman .fk-leg-fill{fill:var(--fk-trousers);stroke:none}
+body.sty-kawaii #world .folk-barelegs .fk-leg-fill{fill:var(--fk-skin)}
+body.sty-kawaii #world .park-distant-tree .op{fill:#B5CBA0;stroke:#879977}
+body.sty-kawaii #world .park-distant-tree .tree-bark{fill:#AD8D69;stroke:#897A60}
+
+body.sty-kawaii .m-buttons .park-go{background:#E0EDD6;border-color:#BFCFB2;color:#455B3A;box-shadow:none}
+body.sty-kawaii .m-buttons .park-go:hover{background:#D1E3C3;border-color:#A9C195;color:#3D5233}
+
+/* Search controls keep the drawing within reach on trackpads and touchscreens. */
+body.sty-kawaii .lockup h1{display:block!important;font:800 16px/1.2 var(--f-body);margin:0 0 2px;letter-spacing:-.03em}
+body.sty-kawaii .lockup .sub{font-size:10px;text-transform:none;letter-spacing:.01em}
+.view-tools{position:absolute;right:12px;bottom:12px;z-index:8;display:flex;flex-direction:column;gap:3px;padding:4px;background:#FFFEFA;border:1px solid #DED8CF;border-radius:16px;box-shadow:0 3px 12px #23192614}
+.view-tools button{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;border:0;border-radius:11px;background:transparent;color:#493F4B;touch-action:manipulation}
+.view-tools button:hover{background:#F0EBE2;color:#C93757}
+.view-tools button:active{transform:scale(.94)}
+.view-tools svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+body.sty-kawaii .tr-prog{padding-bottom:8px;border-bottom:1px solid var(--ui-line);font-size:10px;letter-spacing:.04em}
+body.sty-kawaii .tr-cnt b{font-size:16px;letter-spacing:-.04em;color:var(--ink)}
+body.sty-kawaii .kc,body.sty-kawaii .chip{transition:background-color .16s,border-color .16s,transform .16s}
+body.sty-kawaii .kc:hover,body.sty-kawaii .chip:hover{background-color:#FFF8E9;border-color:#D9B978}
+body.sty-kawaii .kc.got,body.sty-kawaii .chip.got{background-color:#EDF3E7;border-color:#BDD0AE}
+body.sty-kawaii #world .park-water-ring{fill:none;stroke:#E5F7EE;stroke-width:2;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.view-tools button,body.sty-kawaii .kc,body.sty-kawaii .chip{transition:none}}
+
+/* The park has its own field-guide chrome and a quiet weather badge. */
+body.sty-kawaii[data-location="park"]{
+  --ui-soft:#EDF2E5;--ui-line:#CED8C2;--ui-accent:#4B7356;--ui-accent-soft:#DFEBD8;
+}
+body.sty-kawaii[data-location="park"] .bar{background:#355743;border-color:#355743;padding:7px 8px}
+body.sty-kawaii[data-location="park"] .lockup{color:#FFFEF5}
+body.sty-kawaii[data-location="park"] .lockup .sub,
+body.sty-kawaii[data-location="park"] .lk-back{color:#D5E3CA}
+body.sty-kawaii[data-location="park"] .tools button{background:#F3F5EA;border-color:transparent;color:#355743}
+body.sty-kawaii[data-location="park"] #hintBtn{background:#F8DDA0;color:#594621}
+body.sty-kawaii[data-location="park"] .mg-p-stage .mg-pin{background:#BDCAA9}
+.park-atmosphere{position:absolute;top:12px;left:12px;z-index:8;pointer-events:none}
+.park-atmosphere[hidden]{display:none}
+.park-weather{display:flex;align-items:center;gap:5px;padding:6px 9px;border-radius:99px;background:#355743;color:#FFFDF2;font:700 10px var(--f-body);box-shadow:0 2px 5px #25391B12}
+.park-weather svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.park-search-label{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:10px;color:#718066}
+.park-search-label b{font-size:13px;color:#355743;letter-spacing:-.02em}
+body.sty-kawaii[data-location="park"] .finds{background:#FFFEF5;padding-top:12px}
+body.sty-kawaii[data-location="park"] .kw{background:#E6ECD9}
+body.sty-kawaii[data-location="park"] .chip.thing{background:#F1EAD8;border-color:#DFD6BF}
+body.sty-kawaii[data-location="park"] .view-tools{border-color:#C8D4B9;background:#FFFEF5}
+body.sty-kawaii[data-location="park"] .view-tools button{color:#355743}
+body.sty-kawaii #world .park-drifting-leaf{fill:#A6B65C;stroke:#6B8450;stroke-width:1.5;pointer-events:none}
+body.sty-kawaii #world .park-drifting-leaf .leaf-vein{fill:none;stroke:#6B8450;stroke-width:1}
+@media(max-width:380px){
+  .park-atmosphere{left:8px;top:8px}
+  .park-weather{font-size:9px;padding:5px 8px}
+  .park-search-label span{font-size:9px}
+}
+body.sty-kawaii[data-location="park"] .lockup h1{color:#FFFEF5}
+body.sty-kawaii[data-location="park"] .bar .count{color:#D5E3CA}
+/* Water reads as flowing streams and expanding ripples, even when zoomed out. */
+body.sty-kawaii #world .park-cascade{fill:none;stroke:#70B7C1;stroke-width:6;stroke-linecap:round}
+body.sty-kawaii #world .park-flow-streak{fill:none;stroke:#F5FFF6;stroke-width:2.5;stroke-dasharray:5 7;stroke-linecap:round}
+body.sty-kawaii #world .park-drop{fill:#F5FFF6;stroke:#70AEB8;stroke-width:1}
+body.sty-kawaii #world .park-basin-ring{fill:none;stroke:#F5FFF6;stroke-width:2;pointer-events:none}
+body.sty-kawaii #world .park-water-ring{stroke:#F1FFF0;stroke-width:4;stroke-opacity:1}
+body.sty-kawaii #world .park-jet-stream{fill:none;stroke:#70B7C1;stroke-width:3.5;stroke-dasharray:7 4;stroke-linecap:round}
+.cat-stories-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0 10px}
+.cat-stories-heading h4{margin:0;font:700 14px var(--f-body);color:var(--ink)}
+.cat-stories-heading span{font:600 11px var(--f-body);color:var(--ui-muted,var(--muted))}
+body.sty-kawaii .cat-stories .discovery p{font-size:13px;line-height:1.6}
+
+/* Lantern Lane has warm paper, tiled shop roofs and dusk-blue street chrome. */
+body.sty-kawaii[data-location="shopping"]{--ui-soft:#F2E9DF;--ui-line:#DDD0C0;--ui-accent:#95615B;--ui-accent-soft:#F4DEDA}
+body.sty-kawaii[data-location="shopping"] .bar{background:#554B67;border-color:#554B67;padding:7px 8px}
+body.sty-kawaii[data-location="shopping"] .lockup,
+body.sty-kawaii[data-location="shopping"] .lockup h1{color:#FFFAEF}
+body.sty-kawaii[data-location="shopping"] .sub,
+body.sty-kawaii[data-location="shopping"] .lk-back,
+body.sty-kawaii[data-location="shopping"] .bar .count{color:#E8DAE5}
+body.sty-kawaii[data-location="shopping"] .tools button{background:#FCF5E8;color:#554B67;border-color:transparent}
+body.sty-kawaii[data-location="shopping"] #hintBtn{background:#F6D398;color:#63492B}
+body.sty-kawaii[data-location="shopping"] .park-search-label b{color:#705448}
+body.sty-kawaii[data-location="shopping"] .finds{background:#FFFBF2}
+body.sty-kawaii[data-location="shopping"] .kw{background:#EAE1E9}
+body.sty-kawaii .m-buttons .street-go{background:#EDE3F0;border-color:#D4C5DC;color:#62506F}
+body.sty-kawaii .m-buttons .street-go:hover{background:#DFD0E5;color:#554462}
+body.sty-kawaii .st-wall{fill:#F0DEC5}
+body.sty-kawaii .st-side{fill:#C6AE95}
+body.sty-kawaii .st-roof{fill:#6A6B7F;stroke:#504B5B;stroke-width:1.5}
+body.sty-kawaii .st-upstairs{fill:#DFE3D4;stroke:#9B8A7F;stroke-width:1}
+body.sty-kawaii .st-trim,body.sty-kawaii .st-step{fill:#B39174}
+body.sty-kawaii .st-shop-sign{fill:#FFF4D9;stroke:#AF977C;stroke-width:1}
+.st-lettering{fill:#554755;stroke:none;font:800 15px var(--f-body, sans-serif);letter-spacing:.4px}
+body.sty-kawaii .st-window{fill:#B0CBD0;stroke:#7D929B;stroke-width:1}
+body.sty-kawaii .st-door,body.sty-kawaii .st-wood{fill:#AA846B}
+body.sty-kawaii .st-awning-stripe{fill:#FFF3DF;stroke:none;opacity:.85}
+body.sty-kawaii .st-line{fill:none;stroke:#74635D;stroke-width:1.2}
+body.sty-kawaii .st-letter-stroke{fill:none;stroke:#FFF4E4;stroke-width:2.5}
+body.sty-kawaii .st-cup,body.sty-kawaii .st-bowl,body.sty-kawaii .st-paper{fill:#FFF6DA}
+body.sty-kawaii .st-book{fill:#AA8B9D;stroke:#6F5D73;stroke-width:1}
+body.sty-kawaii .st-pot{fill:#C98772}
+body.sty-kawaii .st-stem{fill:none;stroke:#6D8963;stroke-width:2}
+body.sty-kawaii .st-leaves{fill:#9AAD7C}
+body.sty-kawaii .st-flower{fill:#DFA9BD}
+body.sty-kawaii .st-bread,body.sty-kawaii .st-gold{fill:#DCAC5A}
+body.sty-kawaii .st-game,body.sty-kawaii .st-machine{fill:#95AAB5}
+body.sty-kawaii .st-slot{fill:#59515D}
+body.sty-kawaii .st-machine-light{fill:#F4D191;stroke:none}
+body.sty-kawaii .st-crate{fill:#B49673}
+body.sty-kawaii .st-fruit{fill:#BF9575}
+body.sty-kawaii .st-record,body.sty-kawaii .st-wheel{fill:#565260}
+body.sty-kawaii .st-record-label{fill:#EBC684}
+body.sty-kawaii .st-fabric{fill:#D7A0A0}
+body.sty-kawaii .st-counter,body.sty-kawaii .st-table{fill:#D8B896}
+body.sty-kawaii .st-steam{fill:none;stroke:#FFFBEF;stroke-width:3;stroke-linecap:round;pointer-events:none}
+body.sty-kawaii .st-chalk{fill:#5E706D}
+body.sty-kawaii .st-chalk-line{fill:none;stroke:#EEE9D0;stroke-width:2}
+body.sty-kawaii .st-mailbox{fill:#BA8176}
+body.sty-kawaii .st-metal{fill:#8F8993}
+body.sty-kawaii .st-lantern-fill{fill:#ECB989;stroke:#9C7265;stroke-width:1.5}
+body.sty-kawaii #world .st-paving{fill:#DBD1C3;stroke:none}
+body.sty-kawaii #world .st-shop-pavement{fill:#C5B7AC;stroke:none}
+body.sty-kawaii #world .st-forecourt{fill:#E7D9C7;stroke:none}
+body.sty-kawaii #world .st-alley-ground{fill:#D5C5B8;stroke:none}
+body.sty-kawaii #world .st-curb{fill:none;stroke:#A89A90;stroke-width:5}
+body.sty-kawaii #world .st-paving-line{fill:none;stroke:#B8AA9E;stroke-width:1;stroke-opacity:.45}
+body.sty-kawaii #world .st-skyline{fill:#AEA2AE;stroke:none}
+body.sty-kawaii #world .st-wire{fill:none;stroke:#7A6571;stroke-width:2}
+@media(max-width:360px){
+  body.sty-kawaii[data-location="shopping"] .lockup h1{white-space:normal;overflow:visible;text-overflow:clip;font-size:14px;line-height:1.1}
+}
+/* Lantern Lane v2: each shop has its own materials and silhouette. */
+body.sty-kawaii .st-shop-cafe .st-wall{fill:#E7EAD6}
+body.sty-kawaii .st-shop-cafe .st-roof{fill:#537E75}
+body.sty-kawaii .st-shop-bookshop .st-wall{fill:#E5D8C8}
+body.sty-kawaii .st-shop-bookshop .st-roof{fill:#746581}
+body.sty-kawaii .st-shop-ramen .st-wall{fill:#E4BD99}
+body.sty-kawaii .st-shop-ramen .st-roof{fill:#515C6D}
+body.sty-kawaii .st-shop-florist .st-wall{fill:#E0E7C7}
+body.sty-kawaii .st-shop-florist .st-roof{fill:#648C85}
+body.sty-kawaii .st-shop-bakery .st-wall{fill:#F1D9B4}
+body.sty-kawaii .st-shop-bakery .st-roof{fill:#B47563}
+body.sty-kawaii .st-shop-arcade .st-wall{fill:#D4DEEC}
+body.sty-kawaii .st-shop-arcade .st-roof{fill:#5C587D}
+body.sty-kawaii .st-shop-music .st-wall{fill:#E9D1D7}
+body.sty-kawaii .st-shop-music .st-roof{fill:#685B73}
+body.sty-kawaii .st-shop-grocer .st-wall{fill:#D8DBC0}
+body.sty-kawaii .st-shop-grocer .st-roof{fill:#60736B}
+body.sty-kawaii .st-roof-tile{fill:none;stroke:#D6C6B2;stroke-width:.9;stroke-opacity:.65}
+body.sty-kawaii .st-roof-glass{fill:#A7CECB;stroke:#DAE8DC;stroke-width:1}
+body.sty-kawaii .st-timber{fill:#866A59;stroke:none}
+body.sty-kawaii .st-balcony{fill:#AE9C79;stroke:#735F55;stroke-width:1}
+body.sty-kawaii .st-vine{fill:none;stroke:#7B986D;stroke-width:3}
+body.sty-kawaii .st-brick-line{fill:none;stroke:#BDA18B;stroke-width:.8}
+body.sty-kawaii .st-glass-shine{fill:none;stroke:#F8FAE9;stroke-width:4;stroke-opacity:.55}
+body.sty-kawaii .st-side-sign{fill:#B66C62;stroke:#6F514B;stroke-width:1}
+body.sty-kawaii .st-shop-cafe .st-side-sign,body.sty-kawaii .st-shop-grocer .st-side-sign{fill:#688D7A}
+body.sty-kawaii .st-shop-bookshop .st-side-sign,body.sty-kawaii .st-shop-music .st-side-sign{fill:#8F7095}
+body.sty-kawaii .st-shop-arcade .st-side-sign{fill:#56859D}
+.st-jp{fill:#FFF5DA;stroke:none;font:700 13px sans-serif}
+.st-stall-label{fill:#FFF5DA;stroke:none;font:800 18px sans-serif;letter-spacing:2px}
+.st-mini-label{fill:#685A60;stroke:none;font:800 10px var(--f-body, sans-serif)}
+body.sty-kawaii .st-fine{fill:none;stroke:#9D7E6D;stroke-width:.8}
+body.sty-kawaii .st-neon{fill:#F4CC76;stroke:#FFF3C7;stroke-width:2}
+body.sty-kawaii .st-neon-line{fill:none;stroke:#D698BD;stroke-width:3}
+body.sty-kawaii .st-record-shine{fill:none;stroke:#A997AB;stroke-width:2}
+body.sty-kawaii .st-capsule{fill:#EFB9BA;stroke:#A67685;stroke-width:1}
+body.sty-kawaii .st-blossom{fill:#E7B0C0;stroke:#9F7D96;stroke-width:1.3}
+body.sty-kawaii .st-flower-mark{fill:none;stroke:#FFF0DB;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii .st-banner-fill{fill:#B76170;stroke:#83515F;stroke-width:1}
+.st-banner-label{fill:#FFF4D8;stroke:none;font:800 20px sans-serif}
+body.sty-kawaii #world .st-skyline{fill:#A69CAA;stroke:none}
+body.sty-kawaii #world .st-city-detail{fill:none;stroke:#CEC1C8;stroke-width:3}
+body.sty-kawaii #world .st-alley-fence{fill:#AC9B93;stroke:#91837E;stroke-width:2}
+body.sty-kawaii #world .st-alley-detail{fill:none;stroke:#C1B0A2;stroke-width:2}
+body.sty-kawaii #world .st-drain{fill:#B9ADA2;stroke:#A99A91;stroke-width:2}
+body.sty-kawaii #world .st-drain-slot{fill:none;stroke:#948A82;stroke-width:2}
+body.sty-kawaii #world .st-pennant{stroke:#A08483;stroke-width:1.5}
+body.sty-kawaii #world .st-petal{fill:#EDB5CA;stroke:#B5889E;stroke-width:1.5}
+body.sty-kawaii[data-location="shopping"] .park-weather{background:#6F536A;color:#FFF4DA}
+body.sty-kawaii .st-shop-ramen .st-window,body.sty-kawaii .st-shop-bakery .st-window{fill:#DCC49B}
+body.sty-kawaii .st-shop-arcade .st-window{fill:#B0B8D6}
+@media(max-width:600px){
+  body.sty-kawaii .titlecard .tc{min-width:0;width:100%;max-width:100%}
+  body.sty-kawaii .tc p{box-sizing:border-box;max-width:100%;white-space:normal}
+}
+@media(max-width:360px){
+  body.sty-kawaii .titlecard{padding-left:16px;padding-right:62px}
+  body.sty-kawaii .tc h2{font-size:28px}
+}
+/* Park v2: larger garden landmarks, warm timber and lively pond edges. */
+body.sty-kawaii #world .pk-roof{fill:#769D91;stroke:#456F62;stroke-width:1.5}
+body.sty-kawaii #world .pk-roof-line{fill:none;stroke:#D1E1C7;stroke-width:1.3}
+body.sty-kawaii #world .pk-trim{fill:#A77C59}
+body.sty-kawaii #world .pk-lattice{fill:#D8B78D;stroke:#A78461;stroke-width:1}
+body.sty-kawaii #world .pk-lattice-line{fill:none;stroke:#9D805D;stroke-width:2}
+body.sty-kawaii #world .pk-step{fill:#D7C5A3;stroke:#A89476;stroke-width:1}
+body.sty-kawaii #world .pk-rope{fill:none;stroke:#8C7559;stroke-width:2}
+body.sty-kawaii #world .pk-flag-pink{fill:#D68CA4;stroke:#A36F83;stroke-width:1}
+body.sty-kawaii #world .pk-flag-gold{fill:#E8B65F;stroke:#B99356;stroke-width:1}
+body.sty-kawaii #world .pk-vine{fill:none;stroke:#729269;stroke-width:3}
+body.sty-kawaii #world .pk-bloom{fill:#D890AF;stroke:#A36D92;stroke-width:1}
+body.sty-kawaii #world .pk-flower-gold{fill:#F0CB71;stroke:#B39A51;stroke-width:1}
+body.sty-kawaii #world .pk-canopy{fill:#7CA899;stroke:#58796B;stroke-width:1}
+body.sty-kawaii #world .pk-canopy-stripe{fill:#FFF0CE;stroke:none}
+body.sty-kawaii #world .pk-counter{fill:#DFC59B}
+body.sty-kawaii #world .pk-glass{fill:#C0DBD2;stroke:#72978D;stroke-width:1}
+body.sty-kawaii #world .pk-lemon{fill:#EDCC75;stroke:none}
+body.sty-kawaii #world .pk-cone,body.sty-kawaii #world .pk-bread{fill:#DEB87D}
+body.sty-kawaii #world .pk-cup{fill:#FFF3DD}
+body.sty-kawaii #world .pk-sign{fill:#FFF1CB;stroke:#B69D7C;stroke-width:1}
+.pk-label{fill:#624D56;stroke:none;font:800 14px var(--f-body,sans-serif);letter-spacing:.6px}
+body.sty-kawaii #world .pk-line{fill:none;stroke:#7D685F;stroke-width:1.5}
+body.sty-kawaii #world .pk-wheel{fill:#645F69}
+body.sty-kawaii #world .pk-blanket{fill:#DFA2AF;stroke:#A77C90;stroke-width:1}
+body.sty-kawaii #world .pk-check{fill:none;stroke:#FCE6D5;stroke-width:7}
+body.sty-kawaii #world .pk-basket{fill:#BD976A}
+body.sty-kawaii #world .pk-fringe{fill:none;stroke:#EEE0C7;stroke-width:2}
+body.sty-kawaii #world .pk-bird{fill:#BBA0B7;stroke:#7E748A;stroke-width:1}
+body.sty-kawaii #world .pk-wing{fill:#9F8AA7;stroke:#7E748A;stroke-width:1}
+body.sty-kawaii #world .pk-eye{fill:#55494D;stroke:none}
+body.sty-kawaii #world .pk-bark{fill:#A67F60;stroke:#81694F;stroke-width:1}
+body.sty-kawaii #world .pk-branch{fill:none;stroke:#A67F60;stroke-width:8}
+body.sty-kawaii #world .pk-blossom{fill:#E5A8BE;stroke:#A9839E;stroke-width:1.5}
+body.sty-kawaii #world .pk-blossom-mark{fill:none;stroke:#FFF0D9;stroke-width:4;stroke-linecap:round}
+body.sty-kawaii #world .pk-play-roof{fill:#CA8B75;stroke:#986E61;stroke-width:1.5}
+body.sty-kawaii #world .pk-play-panel{fill:#D9B477}
+body.sty-kawaii #world .pk-play-window{fill:#839C82}
+body.sty-kawaii #world .pk-slide{fill:#A7C5C5;stroke:#729599;stroke-width:1.5}
+body.sty-kawaii #world .pk-slide-line{fill:none;stroke:#E9F1DA;stroke-width:3}
+body.sty-kawaii #world .pk-border{fill:#C2B09A;stroke:#A18E7C;stroke-width:1}
+body.sty-kawaii #world .pk-metal{fill:#677C72}
+body.sty-kawaii #world .pk-path-edge{fill:none;stroke:#CFBE98;stroke-linecap:round}
+body.sty-kawaii #world .pk-lawn-light{fill:#DBE6BE;stroke:none}
+body.sty-kawaii #world .pk-meadow{fill:#C3D6A5;stroke:none}
+body.sty-kawaii #world .pk-shore-stone{fill:#BCBBA1;stroke:#919D85;stroke-width:1}
+body.sty-kawaii #world .pk-meadow-leaf{fill:#A1B78A;stroke:none}
+body.sty-kawaii #world .pk-meadow-flower{fill:none;stroke:#EDE3A4;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .pk-lily-pad{fill:#799F77;stroke:#557F66;stroke-width:2}
+body.sty-kawaii #world .pk-lily-vein{fill:none;stroke:#B2C792;stroke-width:1.5}
+body.sty-kawaii #world .pk-lotus{fill:#E2A6BC;stroke:#AD7F9C;stroke-width:1}
+body.sty-kawaii #world .pk-lotus-light{fill:#FCE4DC;stroke:none}
+body.sty-kawaii #world .pk-reed-stem{fill:none;stroke:#6D9470;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .pk-reed-head{fill:#AB8262;stroke:#8C6E55;stroke-width:1}
+body.sty-kawaii #world .pk-duck{fill:#F6EAD2;stroke:#9C9783;stroke-width:1.5}
+body.sty-kawaii #world .pk-duck-wing{fill:#C8BBA2;stroke:#A59A83;stroke-width:1}
+body.sty-kawaii #world .pk-duckling{fill:#EED48F;stroke:#B09A6C;stroke-width:1.5}
+body.sty-kawaii #world .pk-duck-bill{fill:#D7A165;stroke:#AF8857;stroke-width:1}
+body.sty-kawaii #world .pk-duck-wake{fill:none;stroke:#EFF8E4;stroke-width:2}
+body.sty-kawaii #world .pk-butterfly{fill:#DCB485;stroke:#A97E75;stroke-width:1}
+body.sty-kawaii #world .pk-butterfly-body{fill:none;stroke:#8E786B;stroke-width:2}
+body.sty-kawaii #world .park-pond-water{fill:#9ACCC5;stroke:#6C978C;stroke-width:2}
+@media(max-width:360px){
+  body.sty-kawaii[data-location="park"] .lockup h1{white-space:normal;overflow:visible;text-overflow:clip;font-size:14px;line-height:1.1}
+}
+/* Tidepool Harbour: salt-blue chrome, warm sand and painted fishing boats. */
+body.sty-kawaii[data-location="harbour"]{--ui-soft:#E7F0ED;--ui-line:#C6D6D1;--ui-accent:#466D7B;--ui-accent-soft:#DBE9E9}
+body.sty-kawaii[data-location="harbour"] .bar{background:#405D70;border-color:#405D70;padding:7px 8px}
+body.sty-kawaii[data-location="harbour"] .lockup,body.sty-kawaii[data-location="harbour"] .lockup h1{color:#FFF9E8}
+body.sty-kawaii[data-location="harbour"] .sub,body.sty-kawaii[data-location="harbour"] .lk-back{color:#D4E2DC}
+body.sty-kawaii[data-location="harbour"] .tools button{background:#F8F6E9;border-color:transparent;color:#405D70}
+body.sty-kawaii[data-location="harbour"] #hintBtn{background:#F5D799;color:#624E30}
+body.sty-kawaii[data-location="harbour"] .park-weather{background:#486C79;color:#FFF7DF}
+body.sty-kawaii[data-location="harbour"] .park-search-label b{color:#466D7B}
+body.sty-kawaii[data-location="harbour"] .kw{background:#DBE9E7}
+body.sty-kawaii[data-location="harbour"] .finds{background:#FFFCF1}
+body.sty-kawaii .m-buttons .harbour-go{background:#DBE9ED;border-color:#BDD0D7;color:#405D70}
+body.sty-kawaii .m-outings{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.sty-kawaii .m-outings button{min-width:0}
+body.sty-kawaii #world .hb-mast,body.sty-kawaii #world .hb-wood{fill:#AC8B68}
+body.sty-kawaii #world .hb-rope{fill:none;stroke:#A89272;stroke-width:2}
+body.sty-kawaii #world .hb-flag-fill{fill:#D7919F;stroke:#A06F83;stroke-width:1}
+body.sty-kawaii #world .hb-cabin{fill:#F3E4C4;stroke:#AD9E8C;stroke-width:1}
+body.sty-kawaii #world .hb-roof{fill:#657E8A;stroke:#49616C;stroke-width:1.5}
+body.sty-kawaii #world .hb-glass{fill:#B8D9D7;stroke:#7A9C9C;stroke-width:1}
+body.sty-kawaii #world .hb-line{fill:none;stroke:#897562;stroke-width:1.3}
+body.sty-kawaii #world .hb-hull{fill:#C9887E;stroke:#97685F;stroke-width:1.5}
+body.sty-kawaii #world .hb-boat-sage .hb-hull{fill:#7DA497;stroke:#5E7F76}
+body.sty-kawaii #world .hb-hull-sail{fill:#90A8C1;stroke:#6B849D}
+body.sty-kawaii #world .hb-hull-stripe{fill:#F5EACD;stroke:none}
+body.sty-kawaii #world .hb-gunwale{fill:#826F62;stroke:#66554E;stroke-width:1}
+body.sty-kawaii #world .hb-net{fill:#C4BB97;fill-opacity:.65;stroke:#938868;stroke-width:1}
+body.sty-kawaii #world .hb-net-line{fill:none;stroke:#968F6E;stroke-width:1.2}
+body.sty-kawaii #world .hb-fender{fill:#575F69;stroke:#414B54;stroke-width:1}
+.hb-boat-name{fill:#FFF4DB;stroke:none;font:800 12px var(--f-body,sans-serif);letter-spacing:1px}
+body.sty-kawaii #world .hb-sail{fill:#FFF0D1;stroke:#BCB39C;stroke-width:1}
+body.sty-kawaii #world .hb-sail-blue{fill:#CAD9D5;stroke:#99AEA8;stroke-width:1}
+body.sty-kawaii #world .hb-sail-seam{fill:none;stroke:#D4C6A7;stroke-width:1.5}
+body.sty-kawaii #world .hb-beacon-body{fill:#F6EACF;stroke:#AF9C88;stroke-width:1}
+body.sty-kawaii #world .hb-beacon-band{fill:#C7867C;stroke:none}
+body.sty-kawaii #world .hb-beacon-roof{fill:#C7867C;stroke:#966A68;stroke-width:1.5}
+body.sty-kawaii #world .hb-metal{fill:#87969C;stroke:#607B81;stroke-width:1}
+body.sty-kawaii #world .hb-door{fill:#AF8B68;stroke:#8B725F;stroke-width:1}
+body.sty-kawaii #world .hb-step{fill:#CABFA3}
+body.sty-kawaii #world .hb-hut-wall{fill:#A5C2C5;stroke:#78959A;stroke-width:1}
+body.sty-kawaii #world .hb-hut-coral .hb-hut-wall{fill:#DEAF9C;stroke:#AE8C7F}
+body.sty-kawaii #world .hb-sign,body.sty-kawaii #world .hb-paper{fill:#FFF1D1;stroke:#B6A180;stroke-width:1}
+.hb-label{fill:#5D6064;stroke:none;font:800 15px var(--f-body,sans-serif);letter-spacing:.3px}
+.hb-small-label{fill:#5D6064;stroke:none;font:700 12px var(--f-body,sans-serif);letter-spacing:.3px}
+body.sty-kawaii #world .hb-canopy{fill:#719A97;stroke:#557F7E;stroke-width:1}
+body.sty-kawaii #world .hb-canopy-stripe{fill:#FFF1D4;stroke:none}
+body.sty-kawaii #world .hb-counter{fill:#D9C39D}
+body.sty-kawaii #world .hb-fish{fill:#ADC4CC;stroke:#6C929F;stroke-width:1}
+body.sty-kawaii #world .hb-eye{fill:#56636C;stroke:none}
+body.sty-kawaii #world .hb-wheel{fill:#626774}
+body.sty-kawaii #world .hb-crate{fill:#B99773;stroke:#8B735C;stroke-width:1}
+body.sty-kawaii #world .hb-rope-coil{fill:#D8C7A3;stroke:#9E8C6E;stroke-width:1.2}
+body.sty-kawaii #world .hb-buoy{fill:#E6B270;stroke:#A88565;stroke-width:1}
+body.sty-kawaii #world .hb-buoy-band{fill:#FFF0D0;stroke:none}
+body.sty-kawaii #world .hb-water-ring{fill:none;stroke:#E5F1DF;stroke-width:2}
+body.sty-kawaii #world .hb-lifering{fill:#F4E7CA;stroke:#A4937F;stroke-width:1}
+body.sty-kawaii #world .hb-ring-hole{fill:#CCD1CA;stroke:#A4937F;stroke-width:1}
+body.sty-kawaii #world .hb-ring-band{fill:#C7867C;stroke:none}
+body.sty-kawaii #world .hb-chair-cloth{fill:#98B7BD;stroke:#76939B;stroke-width:1}
+body.sty-kawaii #world .hb-chair-stripe{fill:#FFF0CC;stroke:none}
+body.sty-kawaii #world .hb-parasol{fill:#DEADB1;stroke:#B1899C;stroke-width:1}
+body.sty-kawaii #world .hb-parasol-line{fill:none;stroke:#F5DEC9;stroke-width:2}
+body.sty-kawaii #world .hb-ice-canopy,body.sty-kawaii #world .hb-ice-body{fill:#DDA3AE;stroke:#A58095;stroke-width:1}
+body.sty-kawaii #world .hb-cone{fill:#D6AE78}
+body.sty-kawaii #world .hb-scoop{fill:#F0D3C4;stroke:#B99D98;stroke-width:1}
+body.sty-kawaii #world .hb-rock{fill:#B9BBAA;stroke:#909B97;stroke-width:1}
+body.sty-kawaii #world .hb-pool-water{fill:#A2CBC9;stroke:#6F9E9D;stroke-width:1}
+body.sty-kawaii #world .hb-rock-line{fill:none;stroke:#E1D7BB;stroke-width:2}
+body.sty-kawaii #world .hb-seaweed{fill:#7B9C84;stroke:#567D67;stroke-width:1}
+body.sty-kawaii #world .hb-star{fill:#DEAB86;stroke:#B08775;stroke-width:1}
+body.sty-kawaii #world .hb-sky{fill:#D7E7E6;stroke:none}
+body.sty-kawaii #world .hb-sea{fill:#A5CECF;stroke:none}
+body.sty-kawaii #world .hb-island{fill:#96B4AD;stroke:none}
+body.sty-kawaii #world .hb-sea-wave{fill:none;stroke:#E9F2DF;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .hb-quay-ground{fill:#CCD1CA;stroke:none}
+body.sty-kawaii #world .hb-quay-lip{fill:none;stroke:#9CABA9;stroke-width:5}
+body.sty-kawaii #world .hb-sand-ground,body.sty-kawaii #world .hb-sand{fill:#E6D4B3;stroke:none}
+body.sty-kawaii #world .hb-boardwalk{fill:#C5AC89;stroke:none}
+body.sty-kawaii #world .hb-paving-line{fill:none;stroke:#A9B7B0;stroke-width:1;stroke-opacity:.65}
+body.sty-kawaii #world .hb-sand-detail{fill:none;stroke:#C9B990;stroke-width:1.5}
+body.sty-kawaii #world .hb-gull{fill:none;stroke:#7A9197;stroke-width:2;stroke-linecap:round}
+body.sty-kawaii #world .hb-shell{fill:#E9C6B4;stroke:#AF9190;stroke-width:1}
+body.sty-kawaii #world .hb-bucket,body.sty-kawaii #world .hb-spade{fill:#99BAC7;stroke:#6E929F;stroke-width:1}
+body.sty-kawaii #world .hb-compass-red{fill:#C88883;stroke:none}
+body.sty-kawaii #world .hb-brass{fill:#D4B77F;stroke:#9F8964;stroke-width:1}
+body.sty-kawaii #world .hb-sunglasses{fill:#7E8D9B;stroke:#546573;stroke-width:1.5}
+body.sty-kawaii #world .hb-bottle{fill:#A4C5B3;stroke:#789B88;stroke-width:1}
+body.sty-kawaii #world .hb-cork{fill:#B3956D;stroke:#8E7657;stroke-width:1}
+@media(max-width:600px){body.sty-kawaii .m-outings b{font-size:13px}body.sty-kawaii .m-outings span{font-size:10px}body.sty-kawaii .m-outings button{gap:3px}}
+@media(max-width:360px){body.sty-kawaii[data-location="harbour"] .lockup h1{white-space:normal;overflow:visible;text-overflow:clip;font-size:14px;line-height:1.1}}
+/* Harbour v2: deeper sea colour, readable ink and individual seaside shops. */
+body.sty-kawaii #world .hb-sea{fill:#83BCC5}
+body.sty-kawaii #world .hb-sky{fill:#D4E8E5}
+body.sty-kawaii #world .hb-sea-wave{stroke:#F2F6E8;stroke-width:4}
+body.sty-kawaii #world .hb-sea-glint{fill:none;stroke:#FFF5D1;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .hb-tide-foam{fill:none;stroke:#F2F7E9;stroke-width:5;stroke-linecap:round}
+body.sty-kawaii #world .hb-quay-stone{fill:#ACBDB8;stroke:#829B9C;stroke-width:2}
+body.sty-kawaii #world .hb-stone-detail{fill:none;stroke:#D9DECF;stroke-width:2}
+body.sty-kawaii #world .hb-boat-shadow{fill:#537B86;stroke:none;opacity:.3}
+body.sty-kawaii #world .hb-hull{fill:#D17E70}
+body.sty-kawaii #world .hb-boat-sage .hb-hull{fill:#559B8A}
+body.sty-kawaii #world .hb-hull-sail{fill:#729BBE}
+body.sty-kawaii #world .hb-porthole{fill:#567986;stroke:#E4CBA6;stroke-width:3}
+body.sty-kawaii #world .hb-glass-shine{fill:none;stroke:#F2F7E7;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .hb-roof-detail{fill:none;stroke:#A4BDC0;stroke-width:2}
+body.sty-kawaii #world .hb-sail-badge{fill:#D08687;stroke:none}
+body.sty-kawaii #world .hb-sail-mark{fill:none;stroke:#AB747F;stroke-width:3}
+body.sty-kawaii #world .hb-lamp{fill:#FFE4A3;stroke:#BD9556;stroke-width:1}
+body.sty-kawaii #world .hb-lamp-rays{fill:none;stroke:#EDD48D;stroke-width:2}
+body.sty-kawaii #world .hb-cafe-wall{fill:#EBC9B5;stroke:#957769;stroke-width:2}
+body.sty-kawaii #world .hb-planter,body.sty-kawaii #world .hb-windowbox{fill:#BA896F;stroke:#856C5D;stroke-width:2}
+body.sty-kawaii #world .hb-leaf{fill:#7DA37B;stroke:#597B62;stroke-width:1.5}
+body.sty-kawaii #world .hb-flower{fill:#DF97AE;stroke:#AC768A;stroke-width:1}
+body.sty-kawaii #world .hb-flower-gold{fill:#F2CD76;stroke:#B99856;stroke-width:1}
+body.sty-kawaii #world .hb-cup{fill:#FFF2D6;stroke:#9E8B77;stroke-width:1.5}
+body.sty-kawaii #world .hb-steam{fill:none;stroke:#FAF5E7;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .hb-surf-coral{fill:#D58B87;stroke:#925F69;stroke-width:2}
+body.sty-kawaii #world .hb-surf-gold{fill:#EAC16F;stroke:#A08B57;stroke-width:2}
+body.sty-kawaii #world .hb-surf-blue{fill:#7DABB7;stroke:#537988;stroke-width:2}
+body.sty-kawaii #world .hb-surf-stripe{fill:#FFF0CD;stroke:none}
+body.sty-kawaii #world .hb-lifeguard-wall{fill:#DFAC8E;stroke:#9A7565;stroke-width:2}
+body.sty-kawaii #world .hb-castle{fill:#DBC192;stroke:#AF966E;stroke-width:1.5}
+body.sty-kawaii #world .hb-sand-door{fill:#AA926E;stroke:none}
+body.sty-kawaii #world .hb-picnic{fill:#C98F9C;stroke:#9C727E;stroke-width:1.5}
+body.sty-kawaii #world .hb-picnic-check{fill:none;stroke:#FBE4D1;stroke-width:6}
+body.sty-kawaii #world .hb-basket{fill:#BD966F;stroke:#8F755C;stroke-width:1.5}
+body.sty-kawaii #world .hb-bread{fill:#E6C28B;stroke:#B49C70;stroke-width:1}
+body.sty-kawaii #world .hb-pool-ripple{fill:none;stroke:#EAF9E9;stroke-width:2.2;pointer-events:none}
+body.sty-kawaii #world .hb-dune{fill:#D5C194;stroke:none}
+body.sty-kawaii #world .hb-grass{fill:none;stroke:#83A184;stroke-width:4;stroke-linecap:round}
+body.sty-kawaii #world :is(.hb-hull,.hb-cabin,.hb-roof,.hb-hut-wall,.hb-beacon-body,.hb-beacon-roof,.hb-canopy,.hb-ice-body,.hb-lifering,.hb-fender,.hb-counter){stroke:#54636C;stroke-width:2.3}
+body.sty-kawaii #world .hb-line{stroke:#647078;stroke-width:1.7}
+body.sty-kawaii[data-location="harbour"] .finds{border-top:3px solid #A6C7C6}
+body.sty-kawaii[data-location="harbour"] .kw{border-color:#BED4CF}
+body.sty-kawaii[data-location="harbour"] .park-weather{border:1px solid #A9CCCE}
+/* Maple Springs: warm wood, maple red, jade water and mountain paper. */
+body.sty-kawaii[data-location="onsen"]{--ui-soft:#EDE8D8;--ui-line:#D4CCBA;--ui-accent:#805F50;--ui-accent-soft:#EBDCC7}
+body.sty-kawaii[data-location="onsen"] .bar{background:#6D6156;border-color:#6D6156;padding:7px 8px}
+body.sty-kawaii[data-location="onsen"] .lockup,body.sty-kawaii[data-location="onsen"] .lockup h1{color:#FFF4DF}
+body.sty-kawaii[data-location="onsen"] .sub,body.sty-kawaii[data-location="onsen"] .lk-back{color:#E8DCC4}
+body.sty-kawaii[data-location="onsen"] .tools button{background:#FCF3DD;border-color:transparent;color:#766052}
+body.sty-kawaii[data-location="onsen"] #hintBtn{background:#EACB84;color:#66513B}
+body.sty-kawaii[data-location="onsen"] .park-weather{background:#7D6B57;color:#FFF5DC;border:1px solid #DCC9A9}
+body.sty-kawaii[data-location="onsen"] .finds{background:#FFF9E9;border-top:3px solid #C8BD9D}
+body.sty-kawaii[data-location="onsen"] .park-search-label b{color:#84644E}
+body.sty-kawaii[data-location="onsen"] .kw{background:#EAE2C9;border-color:#D2C3A7}
+body.sty-kawaii .m-buttons .onsen-go{background:#EFE0C4;border-color:#D1BA98;color:#735B48}
+body.sty-kawaii .m-outings{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.sty-kawaii #world .os-roof{fill:#627B75;stroke:#485F5B;stroke-width:2.3}
+body.sty-kawaii #world .os-roof-line{fill:none;stroke:#A2B6A4;stroke-width:2}
+body.sty-kawaii #world .os-wall{fill:#E1C4A0;stroke:#8C755F;stroke-width:2}
+body.sty-kawaii #world .os-tea-wall{fill:#D9B5A0;stroke:#967667;stroke-width:2}
+body.sty-kawaii #world .os-shrine-wall{fill:#BD7D68;stroke:#885E55;stroke-width:2}
+body.sty-kawaii #world .os-timber{fill:#9F7757;stroke:#7B624F;stroke-width:1.2}
+body.sty-kawaii #world .os-glass{fill:#B7CCC0;stroke:#7B9990;stroke-width:1.5}
+body.sty-kawaii #world .os-grid{fill:none;stroke:#947B61;stroke-width:1.6}
+body.sty-kawaii #world .os-door{fill:#D3B38C;stroke:#816B53;stroke-width:2}
+body.sty-kawaii #world .os-sign,body.sty-kawaii #world .os-paper{fill:#FFF0CE;stroke:#AA9470;stroke-width:1.2}
+.os-label{fill:#645847;stroke:none;font:800 17px var(--f-body,sans-serif);letter-spacing:.3px}
+.os-small-label{fill:#645847;stroke:none;font:800 12px var(--f-body,sans-serif)}
+body.sty-kawaii #world .os-noren{fill:#7E9C90;stroke:#5F7A6E;stroke-width:1.5}
+body.sty-kawaii #world .os-noren-mark{fill:none;stroke:#F5E5BD;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .os-windowbox{fill:#AE8462;stroke:#80674D;stroke-width:1.5}
+body.sty-kawaii #world .os-leaf{fill:#7D9E76;stroke:#56795F;stroke-width:1.3}
+body.sty-kawaii #world .os-flower{fill:#DC9BA8;stroke:#A87585;stroke-width:1}
+body.sty-kawaii #world .os-flower-gold{fill:#E8C66D;stroke:#AD9859;stroke-width:1}
+body.sty-kawaii #world .os-step{fill:#C6B89A;stroke:#938873;stroke-width:1.2}
+body.sty-kawaii #world .os-cord{fill:none;stroke:#9F8B67;stroke-width:2;stroke-linecap:round}
+body.sty-kawaii #world .os-lantern{fill:#EFC57E;stroke:#AA8560;stroke-width:1.5}
+body.sty-kawaii #world .os-balcony{fill:#B79573;stroke:#7B624E;stroke-width:2}
+body.sty-kawaii #world .os-offering{fill:#9D7A57;stroke:#705941;stroke-width:1.5}
+body.sty-kawaii #world .os-torii{fill:#C78269;stroke:#8D6056;stroke-width:2}
+body.sty-kawaii #world .os-torii-dark{fill:#6C5D55;stroke:#514D46;stroke-width:1}
+body.sty-kawaii #world .os-stone{fill:#B4B7A4;stroke:#8B9587;stroke-width:1.7}
+body.sty-kawaii #world .os-pool-base{fill:#A6AC97;stroke:#7C8C7F;stroke-width:2}
+body.sty-kawaii #world .os-water{fill:#9FCBC0;stroke:#6D9C91;stroke-width:1.4}
+body.sty-kawaii #world .os-rock-line{fill:none;stroke:#DFD8BC;stroke-width:2}
+body.sty-kawaii #world .os-spout{fill:#B3B88B;stroke:#86936F;stroke-width:1.5}
+body.sty-kawaii #world .os-water-stream{fill:#C5E0CB;stroke:#ECF3DD;stroke-width:1}
+body.sty-kawaii #world .os-water-mark,body.sty-kawaii #world .os-pool-ripple{fill:none;stroke:#F4F7DE;stroke-width:2.5;stroke-linecap:round}
+body.sty-kawaii #world .os-steam{fill:none;stroke:#FBF6E7;stroke-width:5;stroke-linecap:round}
+body.sty-kawaii #world .os-moss{fill:#92AE78;stroke:none}
+body.sty-kawaii #world .os-bench{fill:#B8986E;stroke:#8A7256;stroke-width:1.5}
+body.sty-kawaii #world .os-lamp{fill:#F3D599;stroke:#A48E63;stroke-width:1}
+body.sty-kawaii #world .os-bamboo-stem{fill:none;stroke:#95A579;stroke-width:9;stroke-linecap:round}
+body.sty-kawaii #world .os-bamboo-node{fill:none;stroke:#CCD4A2;stroke-width:4}
+body.sty-kawaii #world .os-bark{fill:#A67C5E;stroke:#80634D;stroke-width:1.5}
+body.sty-kawaii #world .os-branch{fill:none;stroke:#A67C5E;stroke-width:8;stroke-linecap:round}
+body.sty-kawaii #world .os-maple{fill:#CD8B6F;stroke:#9A6A5B;stroke-width:1.5}
+body.sty-kawaii #world .os-maple-light{fill:#E5B875;stroke:none}
+body.sty-kawaii #world .os-leaf-vein{fill:none;stroke:#ECCBA0;stroke-width:2.5;stroke-linecap:round}
+body.sty-kawaii #world .os-root{fill:#AE9470;stroke:#87765C;stroke-width:1}
+body.sty-kawaii #world .os-towel{fill:#EDE3CA;stroke:#AF9F80;stroke-width:1.2}
+body.sty-kawaii #world .os-towel-band{fill:#B59592;stroke:none}
+body.sty-kawaii #world .os-bucket{fill:#D0AD79;stroke:#9D835D;stroke-width:1.5}
+body.sty-kawaii #world .os-bucket-dark{fill:#AB8D61;stroke:none}
+body.sty-kawaii #world .os-vending{fill:#AD8C86;stroke:#806969;stroke-width:2}
+body.sty-kawaii #world .os-bottle{fill:#FFF0D6;stroke:#AF9E84;stroke-width:1.2}
+body.sty-kawaii #world .os-metal{fill:#8E9E93;stroke:#667E74;stroke-width:1}
+body.sty-kawaii #world .os-chime-paper{fill:#D2A39C;stroke:#9C7773;stroke-width:1.2}
+body.sty-kawaii #world .os-chime-mark{fill:none;stroke:#F7EACD;stroke-width:2}
+body.sty-kawaii #world .os-canopy{fill:#859C77;stroke:#637A5D;stroke-width:1.5}
+body.sty-kawaii #world .os-counter{fill:#D1B58B;stroke:#977E5C;stroke-width:1.5}
+body.sty-kawaii #world .os-cart{fill:#BA9A72;stroke:#8B7458;stroke-width:1.5}
+body.sty-kawaii #world .os-tray{fill:#8F9380;stroke:#717A6B;stroke-width:1}
+body.sty-kawaii #world .os-egg{fill:#F3E2B9;stroke:#AF9B78;stroke-width:1.2}
+body.sty-kawaii #world .os-wheel{fill:#6F6D69;stroke:#555852;stroke-width:1}
+body.sty-kawaii #world .os-tea-tin{fill:#A6B88E;stroke:#7B8E6D;stroke-width:1.2}
+body.sty-kawaii #world .os-soap{fill:#DEB9B2;stroke:#B29290;stroke-width:1.2}
+body.sty-kawaii #world .os-sky{fill:#E7E4D9;stroke:none}
+body.sty-kawaii #world .os-mountain-far{fill:#B3BCC0;stroke:none}
+body.sty-kawaii #world .os-mountain-near{fill:#98A99C;stroke:none}
+body.sty-kawaii #world .os-mountain-crease{fill:none;stroke:#D5D7C9;stroke-width:5}
+body.sty-kawaii #world .os-village-ground{fill:#D7CDBB;stroke:none}
+body.sty-kawaii #world .os-path{fill:#C8C5B1;stroke:none}
+body.sty-kawaii #world .os-path-edge{fill:none;stroke:#A7AD95;stroke-width:5}
+body.sty-kawaii #world .os-garden-ground{fill:#CAD7B1;stroke:none}
+body.sty-kawaii #world .os-garden-path{fill:#D5CCAD;stroke:none}
+body.sty-kawaii #world .os-paving{fill:none;stroke:#A8AD96;stroke-width:1.3;stroke-opacity:.7}
+body.sty-kawaii #world .os-grass{fill:none;stroke:#8EAB7B;stroke-width:4;stroke-linecap:round}
+body.sty-kawaii #world .os-fallen-leaf{fill:#CD916D;stroke:#A67B5E;stroke-width:1}
+body.sty-kawaii #world .os-creek-bank{fill:none;stroke:#A7B893;stroke-width:75}
+body.sty-kawaii #world .os-creek{fill:none;stroke:#9FCAC0;stroke-width:42}
+body.sty-kawaii #world .os-creek-wave{fill:none;stroke:#E8F2DA;stroke-width:3}
+@media(min-width:601px){body.sty-kawaii .m-outings{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:360px){body.sty-kawaii[data-location="onsen"] .lockup h1{font-size:14px}}
+/* Maple Springs v2: warm shop fronts, terraced gardens and open-air baths. */
+body.sty-kawaii #world .os-entrance-roof{fill:#7C9180;stroke:#4F675A;stroke-width:2}
+body.sty-kawaii #world .os-roof-tile{fill:none;stroke:#90A99A;stroke-width:1.4}
+body.sty-kawaii #world .os-plank{fill:none;stroke:#BA9A77;stroke-width:1.7}
+body.sty-kawaii #world .os-glass-shine{fill:none;stroke:#F2EACD;stroke-width:3}
+body.sty-kawaii #world .os-chimney{fill:#B09A79;stroke:#84715D;stroke-width:1.5}
+body.sty-kawaii #world .os-ryokan-awning{fill:#9B7A60;stroke:#715C4D;stroke-width:1.5}
+body.sty-kawaii #world .os-wood-panel{fill:#B59673;stroke:#89775B;stroke-width:1}
+body.sty-kawaii #world .os-teapot{fill:#A1B2A0;stroke:#738774;stroke-width:1.5}
+body.sty-kawaii #world .os-cup{fill:#F7E7C5;stroke:#A99678;stroke-width:1.2}
+body.sty-kawaii #world .os-menu{fill:#756659;stroke:#554E44;stroke-width:1.2}
+body.sty-kawaii #world .os-menu-line{fill:none;stroke:#F3DFC0;stroke-width:1.8}
+body.sty-kawaii #world .os-gold-trim{fill:#D0AD62;stroke:none}
+body.sty-kawaii #world .os-shrine-rope{fill:none;stroke:#C8AB75;stroke-width:6;stroke-linecap:round}
+body.sty-kawaii #world .os-bell{fill:#B89A60;stroke:#8A7952;stroke-width:1.3}
+body.sty-kawaii #world .os-ema{fill:#D3AD7B;stroke:#A78B66;stroke-width:1.2}
+body.sty-kawaii #world .os-ema-mark{fill:none;stroke:#9B655D;stroke-width:2;stroke-linecap:round}
+body.sty-kawaii #world .os-dango{fill:none;stroke:#AE8862;stroke-width:3}
+body.sty-kawaii #world .os-sweet-pink{fill:#DFADB3;stroke:#AC8792;stroke-width:1}
+body.sty-kawaii #world .os-sweet-cream{fill:#F3E6BD;stroke:#B4A582;stroke-width:1}
+body.sty-kawaii #world .os-sweet-green{fill:#B1C29A;stroke:#899F7C;stroke-width:1}
+body.sty-kawaii #world .os-bonsai-pot{fill:#B98570;stroke:#896859;stroke-width:1.5}
+body.sty-kawaii #world .os-koi{fill:#F4E9CB;stroke:#869D92;stroke-width:1.2}
+body.sty-kawaii #world .os-koi-red{fill:#CC8D7A;stroke:none}
+body.sty-kawaii #world .os-koi-gold{fill:#E1B669;stroke:none}
+body.sty-kawaii #world .os-eye{fill:#54635B;stroke:none}
+body.sty-kawaii #world .os-lantern-rib{fill:none;stroke:#DBAE6D;stroke-width:1.2}
+body.sty-kawaii #world .os-lantern-badge{fill:#C78B76;stroke:#AE7C6B;stroke-width:1}
+body.sty-kawaii #world .os-daruma{fill:#CD8D7D;stroke:#9F7069;stroke-width:1.2}
+body.sty-kawaii #world .os-zen-border{fill:#B8BBA5;stroke:#8E9986;stroke-width:1.5}
+body.sty-kawaii #world .os-zen-sand{fill:#E0D1AD;stroke:none}
+body.sty-kawaii #world .os-zen-line{fill:none;stroke:#BCAA84;stroke-width:2}
+body.sty-kawaii #world .os-bamboo-pipe{fill:#A9BA83;stroke:#7A926F;stroke-width:1.8}
+body.sty-kawaii #world .os-water-trickle{fill:none;stroke:#F0F4D9;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .os-distant-pine{fill:#7F998A;stroke:none}
+body.sty-kawaii #world .os-terrace-stone{fill:#B7B59D;stroke:#949E89;stroke-width:1.5}
+body.sty-kawaii #world .os-garden-moss{fill:#B4C594;stroke:none}
+body.sty-kawaii #world .os-sand-patch{fill:#E2D5B2;stroke:none}
+body.sty-kawaii #world .os-path-moss{fill:none;stroke:#A6B88C;stroke-width:4;stroke-linecap:round}
+body.sty-kawaii #world .os-path{fill:#D0C8AE}
+body.sty-kawaii #world .os-steam{stroke-width:6}
+body.sty-kawaii #world .os-pool-ripple{stroke-width:3}
+body.sty-kawaii #world .os-maple{fill:#CB8669}
+body.sty-kawaii #world .os-maple-light{fill:#E6B566}
+body.sty-kawaii #mgDefs :is(.ink-sh,.tn) :is(.os-pool-steam,.os-roof-steam,.os-tea-steam,.os-cart-steam){display:none}
+body.sty-kawaii[data-location="onsen"] .bar{background:#705B4F;border-color:#705B4F}
+body.sty-kawaii[data-location="onsen"] .finds{border-top-color:#CAB38C}
+/* V3 twilight uses flat colour and small light pools, without blur filters. */
+body.sty-kawaii #world .os-sky{fill:#DDD0D6}
+body.sty-kawaii #world .os-mountain-far{fill:#AEB0BF}
+body.sty-kawaii #world .os-mountain-near{fill:#8CA59D}
+body.sty-kawaii #world .os-distant-pine{fill:#718D80}
+body.sty-kawaii #world .os-glass{fill:#EBD09A;stroke:#A88E6B}
+body.sty-kawaii #world .os-lantern{fill:#F4CF82;stroke:#AD855C}
+body.sty-kawaii #world .os-lamp{fill:#F1CC7E}
+body.sty-kawaii #world .os-water{fill:#8EBDB4;stroke:#638E88}
+body.sty-kawaii #world .os-golden-maple .os-maple{fill:#D5AF60;stroke:#A17F50}
+body.sty-kawaii #world .os-golden-maple .os-maple-light{fill:#EACD87}
+body.sty-kawaii #world .os-camellia-bloom{fill:#E7B4B4;stroke:#B38194;stroke-width:1.5}
+body.sty-kawaii #world .os-camellia-vein{fill:none;stroke:#AEC09A;stroke-width:3}
+body.sty-kawaii #world .os-light-pool{fill:#F6D08B;fill-opacity:.25;stroke:none}
+body.sty-kawaii #world .os-bridge-deck{fill:#BB9672;stroke:#896A55;stroke-width:3}
+body.sty-kawaii #world .os-bridge-plank{fill:none;stroke:#DDC49C;stroke-width:3}
+body.sty-kawaii #world .os-bridge-rail{fill:none;stroke:#A17658;stroke-width:6;stroke-linecap:round}
+body.sty-kawaii #world :is(.os-wall,.os-tea-wall,.os-shrine-wall,.os-roof,.os-door,.os-torii,.os-counter,.os-stone,.os-windowbox,.os-vending,.os-pool-base){stroke:#625A51;stroke-width:2.8}
+body.sty-kawaii #world .os-steam{stroke:#FFF7E8;stroke-width:7}
+body.sty-kawaii[data-location="onsen"] .bar{background:#74564D;border-color:#74564D}
+body.sty-kawaii[data-location="onsen"] .park-weather{background:#82654E;border-color:#E4CBA0}
+/* V3 finishes: small flat fills and strokes, with no filters or full-scene effects. */
+body.sty-kawaii #world .rv3-fabric{fill:var(--k-soft,#B9AEC9);stroke:#8C798B;stroke-width:.9}
+body.sty-kawaii #world .rv3-quilt{fill:#D5B3BA;stroke:none}
+body.sty-kawaii #world .rv3-stitch{fill:none;stroke:#FFF0DF;stroke-width:1;stroke-dasharray:3 2}
+body.sty-kawaii #world .rv3-piping{fill:none;stroke:#8D7169;stroke-width:.8;opacity:.6}
+body.sty-kawaii #world .rv3-bookbands{fill:none;stroke:#F8D99E;stroke-width:1.4}
+body.sty-kawaii #world .rv3-note{fill:#FFF0C9;stroke:#B4987E;stroke-width:.6}
+body.sty-kawaii #world .rv3-magnet{fill:#C77582;stroke:none}
+body.sty-kawaii #world .pk-greenhouse-frame{fill:none;stroke:#EEE0C3;stroke-width:3}
+body.sty-kawaii #world .pk-clock-hour{fill:none;stroke:#776B76;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .pk-seat-scroll{fill:none;stroke:#66786D;stroke-width:3;stroke-linecap:round}
+body.sty-kawaii #world .pk-stone-carving{fill:none;stroke:#899F9A;stroke-width:1.5}
+body.sty-kawaii #world .pk-steam{fill:none;stroke:#F7E8D6;stroke-width:5;stroke-linecap:round}
+.pk-mini-label{fill:#77636B;stroke:none;font:800 10px var(--f-body,sans-serif);letter-spacing:1px}
+body.sty-kawaii #world .st-facade-edge{fill:none;stroke:#9A8278;stroke-width:3}
+body.sty-kawaii #world .st-warm-lintel{fill:#F3D39B;stroke:none}
+body.sty-kawaii #world .st-chime-glass{fill:#D8E8D9;stroke:#8C9E95;stroke-width:1}
+body.sty-kawaii #world .st-chime-paper{fill:#EEC7BC;stroke:#AB8987;stroke-width:.6}
+body.sty-kawaii #world .st-boba-cup{fill:#DAC2B2;stroke:#947C83;stroke-width:1.5}
+body.sty-kawaii #world .st-boba-pearl{fill:none;stroke:#6B5363;stroke-width:4;stroke-linecap:round}
+body.sty-kawaii #world .st-plush{fill:#F4D5BD;stroke:#B58E94;stroke-width:1.5}
+.st-dark-label{fill:#7A607E;font-size:14px;letter-spacing:.5px}
+body.sty-kawaii #world .st-festival-roof{fill:#925D72;stroke:#714C66;stroke-width:3}
+body.sty-kawaii #world .st-festival-sign{fill:#E9C993;stroke:#9B6D76;stroke-width:3}
+.st-festival-label{fill:#835567;stroke:none;font:800 17px sans-serif}
+body.sty-kawaii #world .hb-pot-net{fill:none;stroke:#A48F77;stroke-width:2}
+body.sty-kawaii #world .hb-pot-tag{fill:#E3C786;stroke:#A18B6C;stroke-width:1}
+body.sty-kawaii #world .hb-woodgrain{fill:none;stroke:#AB9680;stroke-width:1.2}
+body.sty-kawaii #world .hb-crab{fill:#D8917A;stroke:#A8716A;stroke-width:2}
+body.sty-kawaii #world .hb-crab-legs{fill:none;stroke:#B4776B;stroke-width:2.5;stroke-linecap:round}
+body.sty-kawaii #world .hb-seal{fill:#A6ADA7;stroke:#74898A;stroke-width:2}
+body.sty-kawaii #world .hb-seal-line{fill:none;stroke:#65757C;stroke-width:2;stroke-linecap:round}
+/* Keep moving curtains, steam and chimes out of the static shadow/tone copies. */
+body.sty-kawaii #mgDefs :is(.rv3-curtain,.pk-train-steam,.st-claw-arm,.st-wind-chime,.hb-table-steam,.hb-shop-windbell){visibility:hidden}
+body.sty-kawaii #stage[data-lod="far"] :is(.rv3-frieze,.rv3-panelling,.room-v3-detail){visibility:hidden}
+/* Daily ritual: a compact passport, a shared destination and a story to return for. */
+.daily-routine{background:#FFF8E9;border:1px solid #D8C9B9;border-radius:18px;padding:15px 16px;text-align:left;color:#59495D}
+.daily-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.daily-heading p{margin:0 0 3px;font:800 9px var(--f-body,sans-serif);letter-spacing:1.3px;color:#9B6E82}
+.daily-heading h3{margin:0;font:800 21px var(--f-body,sans-serif);letter-spacing:-.5px}
+.daily-status{white-space:nowrap;font:800 11px var(--f-body,sans-serif);padding:6px 9px;border-radius:30px;background:#E7DACE;color:#785970}
+.daily-stamps{list-style:none;margin:13px 0 12px;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.daily-stamps li{display:flex;align-items:center;flex-direction:column;gap:4px;border:1px dashed #D6C6B8;border-radius:11px;padding:8px 2px;background:#FBF1DF;font:700 10px var(--f-body,sans-serif);min-width:0}
+.daily-stamps .dj-icon{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#ECDFCD;font:700 19px sans-serif;color:#998678}
+.daily-stamps small{font-size:8px;color:#988481}
+.daily-stamps li.today{border:1px solid #BA7F96;background:#F5DFE8}
+.daily-stamps li.today .dj-icon{background:#9A647C;color:#FFF6E4}
+.daily-stamps li.complete{background:#E6EDD9;border:1px solid #9AAF8A}
+.daily-stamps li.complete .dj-icon{background:#768C6C;color:#FFF9E9}
+.daily-next{display:grid;gap:5px;margin:0;font:500 11px/1.4 var(--f-body,sans-serif)}
+.daily-next b{font-size:12px}.daily-next span{color:#88737F}
+.daily-shared{margin:10px 0 0;font:500 9px/1.4 var(--f-body,sans-serif);color:#9D8988}
+.menu .daily-routine{margin:12px 0 2px}.menu .m-state{margin-top:10px}
+.result-journey{margin:12px 0}.result-journey .daily-heading h3{font-size:18px}
+@media(max-width:600px){.menu .daily-routine{padding:12px}.daily-heading h3{font-size:19px}.daily-stamps{gap:4px}.daily-stamps li{font-size:9px}.daily-stamps small{font-size:8px}}
+.menu.tight3 .daily-shared,.menu.tight4 .daily-shared{display:none}
+.menu.tight3 .daily-stamps li,.menu.tight4 .daily-stamps li{padding:5px 2px}
+/* Expressive menu vignettes; paws keep their floor and furniture contact. */
+.menu-sunbeam path{fill:#FFD978;stroke:none}
+#paradeSvg .menu-heat path{fill:none;stroke:#E98D5F;stroke-width:3.3;stroke-linecap:round;stroke-linejoin:round}
+#paradeSvg .menu-sun-cloud path{fill:#FFFDF6;stroke:#AB93A1;stroke-width:1.6;stroke-linejoin:round}
+.menu[hidden] #paradeSvg *,body.menu-background #paradeSvg *{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){#paradeSvg *{animation:none!important}}
+
+.daily-brief{margin:7px 0 0;font:700 11px/1.35 var(--f-body,sans-serif);color:#88647A}
+.daily-story{margin:8px 0 0;font:500 10px/1.4 var(--f-body,sans-serif);color:#88737F}
+
+/* Give the animation room to read, even when the daily brief is visible. */
+body.sty-kawaii .menu .m-head{padding-top:calc(8px + env(safe-area-inset-top));padding-bottom:28px;margin-bottom:-10px}
+body.sty-kawaii .menu{--mw:62px}
+body.sty-kawaii .menu .m-title{font-size:29px;padding:9px 12px 7px}
+body.sty-kawaii .menu #paradeSvg{height:158px}
+body.sty-kawaii .menu.tight2 #paradeSvg{height:132px}
+body.sty-kawaii .menu.tight4 #paradeSvg{height:112px}
+body.sty-kawaii .menu.tight2 .m-state{display:none}
+body.sty-kawaii .menu.tight3 .daily-story{display:none}
+@media(prefers-reduced-motion:no-preference){
+ .m-mark .mk-head{animation:menuMarkTilt 6.8s ease-in-out infinite}
+ @keyframes menuMarkTilt{0%,100%{transform:rotate(0)}35%{transform:rotate(-6deg)}65%{transform:rotate(7deg)}}
+ .m-mark .mk-tail{animation:menuMarkTail 4.8s ease-in-out infinite}
+ @keyframes menuMarkTail{0%,100%{transform:rotate(-6deg)}40%{transform:rotate(15deg)}70%{transform:rotate(-10deg)}}
+}
+.menu[hidden] .m-mark *,body.menu-background .m-mark *{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){#paradeSvg *{animation:none!important}}
+
+body.menu-reduced #paradeSvg *,body.menu-reduced .m-mark *,body.menu-reduced .m-sky *{animation:none!important}
+.menu[hidden] .m-sky *,body.menu-background .m-sky *{animation-play-state:paused!important}
+
+/* A readable setup, a quick punchline, then a calm reset before the next cat. */
+#paradeSvg .pa-cat_sitting{animation:menuSneeze 7.4s ease-in-out infinite}
+@keyframes menuSneeze{
+  0%,14%,65%,100%{transform:scale(1)}
+  22%{transform:scaleX(.94) scaleY(1.1)}
+  29%{transform:scaleX(1.14) scaleY(.82)}
+  34%{transform:scaleX(.96) scaleY(1.08)}
+  42%{transform:scale(1)}
+}
+#paradeSvg .pa-cat_walking{animation:menuMouseAmbush 7.4s ease-in-out infinite}
+@keyframes menuMouseAmbush{
+  0%,12%,100%{transform:translateX(-14px)}
+  25%{transform:translateX(26px) scaleY(.9)}
+  32%{transform:translate(-5px,-23px) rotate(-8deg)}
+  39%{transform:translateX(-25px) scaleX(1.12) scaleY(.86)}
+  49%,76%{transform:translateX(-16px)}
+}
+#paradeSvg .p-mouse{animation:menuBraveMouse 7.4s ease-in-out infinite}
+@keyframes menuBraveMouse{
+  0%,17%,100%{transform:translateX(0)}
+  29%,43%{transform:translateX(-55px)}
+  53%{transform:translateX(5px)}
+  65%,82%{transform:translateX(0)}
+}
+/* Noodle: normal size, a gather, a slow stretch, a little too far, then she lets go and
+   bounces back. The timings are in menu-motion.js's script; each keyframe says how it
+   eases into the next. Her back end stays put, so she stretches towards the sun. */
+#paradeSvg .pa-cat_stretch{animation:menuOverstretch 7.4s linear infinite;transform-origin:85% 100%}
+@keyframes menuOverstretch{
+  0%,26%{transform:scale(1);animation-timing-function:ease-in-out}
+  30%,31.5%{transform:scaleX(.94) scaleY(1.06);animation-timing-function:cubic-bezier(.35,0,.3,1)}
+  42%{transform:scaleX(1.4) scaleY(.84);animation-timing-function:ease-out}
+  45%{transform:scaleX(1.54) scaleY(.8);animation-timing-function:ease-in-out}
+  53%{transform:scaleX(1.57) scaleY(.79);animation-timing-function:ease-in-out}
+  60%{transform:scaleX(1.54) scaleY(.8);animation-timing-function:cubic-bezier(.6,0,.9,.5)}
+  64%{transform:scaleX(.86) scaleY(1.2);animation-timing-function:ease-out}
+  67%{transform:translateY(-9px) scaleX(.96) scaleY(1.06);animation-timing-function:ease-in}
+  70%{transform:scaleX(1.08) scaleY(.92);animation-timing-function:ease-in-out}
+  74%{transform:scaleX(.98) scaleY(1.03);animation-timing-function:ease-in-out}
+  78%,100%{transform:scale(1)}
+}
+}
+}
+#paradeSvg .pa-cat_flop{animation:menuSnort 7.4s ease-in-out infinite}
+@keyframes menuSnort{
+  0%,13%,60%,100%{transform:scale(1)}
+  36%{transform:scaleX(1.07) scaleY(.93)}
+  40%{transform:scaleX(.97) scaleY(1.12)}
+  44%{transform:scaleX(1.05) scaleY(.89)}
+  49%{transform:scale(1)}
+}
+#paradeSvg .pa-cat_playing{animation:menuYarnRecoil 7.4s ease-in-out infinite}
+@keyframes menuYarnRecoil{
+  0%,17%,74%,100%{transform:translateX(0)}
+  26%{transform:translateX(12px) scaleY(.93)}
+  34%{transform:translateX(3px)}
+  44%{transform:translateX(-17px) rotate(-7deg)}
+  52%{transform:translateX(-8px) scaleY(.9)}
+  61%{transform:translateX(0)}
+}
+#paradeSvg .pa-cat_playing .p-paw{animation:menuWildSwat 7.4s ease-in-out infinite}
+@keyframes menuWildSwat{
+  0%,16%,72%,100%{transform:rotate(0)}
+  23%{transform:rotate(-39deg)}
+  29%{transform:rotate(48deg)}
+  38%{transform:rotate(4deg)}
+  44%{transform:rotate(-42deg)}
+  51%{transform:rotate(30deg)}
+  59%{transform:rotate(-12deg)}
+}
+#paradeSvg .p-wool{animation:menuRunawayWool 7.4s ease-in-out infinite}
+@keyframes menuRunawayWool{
+  0%,25%,100%{transform:translateX(0) rotate(0)}
+  36%{transform:translate(69px,-9px) rotate(250deg)}
+  43%{transform:translate(14px,0) rotate(70deg)}
+  49%{transform:translate(-13px,-5px) rotate(-60deg)}
+  58%{transform:translate(16px,0) rotate(70deg)}
+  70%,87%{transform:translateX(0) rotate(0)}
+}
+#paradeSvg .pa-cat_peek{animation:menuCaughtSpy 7.4s ease-in-out infinite}
+@keyframes menuCaughtSpy{
+  0%,11%,100%{transform:translateX(-62px)}
+  22%{transform:translateX(-14px)}
+  29%{transform:translateX(12px)}
+  35%{transform:translate(6px,-9px)}
+  42%,65%{transform:translateX(-66px)}
+  77%{transform:translateX(-32px)}
+  84%{transform:translateX(-64px)}
+}
+#paradeSvg .pa-cat_curled{animation:menuDreamPaws 7.4s ease-in-out infinite}
+@keyframes menuDreamPaws{
+  0%,15%,67%,100%{transform:scale(1)}
+  28%{transform:scaleY(1.06)}
+  38%{transform:scaleY(.96) rotate(-2deg)}
+  43%{transform:scaleY(1.03) rotate(2deg)}
+  49%{transform:scaleY(.98) rotate(-1deg)}
+  55%{transform:scale(1)}
+}
+#paradeSvg .pa-cat_loaf{animation:menuMeltedLoaf 7.4s ease-in-out infinite}
+@keyframes menuMeltedLoaf{
+  0%,13%,100%{transform:scale(1)}
+  31%{transform:scaleX(1.16) scaleY(.74)}
+  46%,61%{transform:scaleX(1.12) scaleY(.8)}
+  78%{transform:scale(1)}
+}
+#paradeSvg .pa-cat_highsit{animation:menuRoyalRecovery 7.4s ease-in-out infinite}
+@keyframes menuRoyalRecovery{
+  0%,14%,63%,100%{transform:scale(1)}
+  27%{transform:scaleX(1.04) scaleY(.96)}
+  36%{transform:scaleX(.97) scaleY(1.07)}
+  43%{transform:scaleX(1.04) scaleY(.95)}
+  51%{transform:scaleY(1.025)}
+}
+/* Sixpence: crouches and wiggles, pounces in an arc onto the coin, sits on it, then trots
+   back, trotting being a run of small hops. The coin is 74px away. Times follow the script
+   in menu-motion.js. */
+#paradeSvg .pa-cat_tortie{animation:menuCoinGrab 7.4s linear infinite}
+@keyframes menuCoinGrab{
+  0%,19%{transform:none;animation-timing-function:ease-in-out}
+  22%{transform:rotate(-2deg) scaleX(1.06) scaleY(.9)}
+  24%{transform:rotate(2deg) scaleX(1.07) scaleY(.88)}
+  26%{transform:rotate(-2.5deg) scaleX(1.08) scaleY(.86)}
+  28%{transform:rotate(2.5deg) scaleX(1.09) scaleY(.85)}
+  31%{transform:scaleX(1.1) scaleY(.82);animation-timing-function:ease-out}
+  35%{transform:translate(38px,-22px) rotate(4deg) scaleX(.95) scaleY(1.08);animation-timing-function:ease-in}
+  40%{transform:translateX(74px) scaleX(1.16) scaleY(.8);animation-timing-function:ease-out}
+  43%{transform:translateX(74px) scaleX(.97) scaleY(1.04);animation-timing-function:ease-in-out}
+  46%,58%{transform:translateX(74px) scale(1)}
+  61%{transform:translateX(74px) scaleX(.97) scaleY(1.05)}
+  68%{transform:translateX(74px) scale(1);animation-timing-function:ease-in}
+  72%{transform:translate(60px,-9px) scaleX(.95) scaleY(1.06);animation-timing-function:ease-out}
+  75%{transform:translateX(52px) scaleX(1.07) scaleY(.92);animation-timing-function:ease-in}
+  78%{transform:translate(34px,-9px) scaleX(.95) scaleY(1.06);animation-timing-function:ease-out}
+  81%{transform:translateX(24px) scaleX(1.07) scaleY(.92);animation-timing-function:ease-in}
+  84%{transform:translate(6px,-6px) scaleX(.96) scaleY(1.04);animation-timing-function:ease-out}
+  87%{transform:scaleX(1.06) scaleY(.93);animation-timing-function:ease-in-out}
+  90%,100%{transform:none}
+}
+#paradeSvg .menu-glint path,#paradeSvg .menu-ching path{fill:none;stroke:#E8A93A;stroke-width:3;stroke-linecap:round}
+#paradeSvg .menu-comic-caption path{fill:#FFFDF6;stroke:#59495D;stroke-width:1.8;stroke-linejoin:round}
+#paradeSvg .menu-comic-caption text{fill:#9C536C;stroke:none;font:800 26px var(--f-body,sans-serif);letter-spacing:-.5px}
+#paradeSvg :is(.menu-sneeze,.menu-surprise,.menu-snore-pop,.menu-toasty){fill:none;stroke:#AC7085;stroke-width:3;stroke-linecap:round}
+#paradeSvg .menu-sneeze circle{fill:#E7E3F1;stroke:#AC7085;stroke-width:1.5}
+#paradeSvg .menu-snore circle{fill:#CEE5EE;fill-opacity:.7;stroke:#849DB0;stroke-width:2}
+#paradeSvg .menu-snore path{stroke:#FFFDF6;stroke-width:3}
+#paradeSvg .menu-blep{fill:#EF9CA7;stroke:#965C73;stroke-width:1.5}
+#paradeSvg .menu-blep path+path{fill:none}
+#paradeSvg .menu-fish-dream{fill:#FFFDF6;stroke:#AB93A1;stroke-width:1.5}
+#paradeSvg .menu-dream-fish{fill:#E8B36E;stroke:#927582;stroke-width:1.5}
+#paradeSvg .menu-fish-dream circle:last-child{fill:#59495D;stroke:none}
+@media(prefers-reduced-motion:reduce){#paradeSvg *{animation:none!important}}
+
+/* ---- the cats are one scrolling line, with the bonus things in a line under them ----
+   The cats' own count and gauge, and the totals line above them, are hidden, not removed:
+   showProgress() and showThingCount() still write to them. Each bonus chip carries its own
+   found/total number. */
+body.sty-kawaii .tr-prog, body.sty-kawaii .park-search-label{display:none}
+body.sty-kawaii .finds{padding:8px 10px}
+body.sty-kawaii .kz{height:auto; display:block}
+body.sty-kawaii .kr{
+  display:flex; flex-wrap:nowrap; justify-content:flex-start; gap:6px; width:100%; padding:2px;
+  overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+body.sty-kawaii .kr::-webkit-scrollbar{display:none}
+body.sty-kawaii .kc.chip{flex:0 0 62px; width:62px; max-width:62px; height:66px; scroll-snap-align:start}
+/* centred while it all fits, starting at the left once it does not */
+body.sty-kawaii .kc.chip:first-child{margin-left:auto}
+body.sty-kawaii .kc.chip:last-child{margin-right:auto}
+/* a number on each bonus chip in place of a dot for every one of them */
+body.sty-kawaii .chip.thing .n{height:auto; gap:0; font:600 10px/1.2 var(--f-num); color:var(--ui-muted); letter-spacing:0; font-variant-numeric:tabular-nums}
+body.sty-kawaii .chip.thing .n b{font-weight:800; color:var(--ink)}
+body.sty-kawaii .chip.thing.part .n b{color:var(--ui-accent)}
+body.sty-kawaii .chip.thing.got .n, body.sty-kawaii .chip.thing.got .n b{color:#476239}
+/* the bonus row grows with the numbers on it: each chip is as wide as its count needs, and
+   the row scrolls sideways like the cats' line. Padding keeps the tick badge, which sits
+   outside the chip, from being clipped. */
+body.sty-kawaii .tr-things{
+  justify-content:flex-start; gap:6px; padding:8px 8px 2px;
+  overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+}
+body.sty-kawaii .tr-things::-webkit-scrollbar{display:none}
+body.sty-kawaii .chip.thing{flex:0 0 auto; min-width:38px; max-width:none; padding-left:5px; padding-right:5px}
+body.sty-kawaii .chip.thing:first-child{margin-left:auto}
+body.sty-kawaii .chip.thing:last-child{margin-right:auto}
+
+/* ---- the lines scroll sideways: say so ----
+   updateCues() sets .more-l / .more-r on the line's host from its scroll position. */
+body.sty-kawaii .kz{position:relative}
+body.sty-kawaii .cue{
+  position:absolute; top:calc(50% - 13px); z-index:3; width:26px; height:26px; padding:0; display:none; place-items:center;
+  border:1px solid var(--ui-line); border-radius:50%; background:#FFFEFA; color:var(--ink); cursor:pointer;
+  box-shadow:0 1px 5px rgba(40,30,50,.25);
+}
+body.sty-kawaii .cue svg{width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+body.sty-kawaii .cue-r{right:3px}
+body.sty-kawaii .cue-l{left:3px}
+body.sty-kawaii .cue-l svg{transform:scaleX(-1)}
+body.sty-kawaii .kz.more-r .cue-r, body.sty-kawaii .kz.more-l .cue-l{display:grid}
+body.sty-kawaii .kz.more-r .cue-r{animation:cueNudge 1.7s ease-in-out infinite}
+@keyframes cueNudge{0%,100%{transform:translateX(0)} 50%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){ body.sty-kawaii .kz.more-r .cue-r{animation:none} }
+/* the edge that has more behind it fades out */
+body.sty-kawaii .kz.more-r:not(.more-l) .kr, body.sty-kawaii .tr-things.more-r:not(.more-l){
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent); mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent);
+}
+body.sty-kawaii .kz.more-l:not(.more-r) .kr, body.sty-kawaii .tr-things.more-l:not(.more-r){
+  -webkit-mask-image:linear-gradient(270deg,#000 calc(100% - 34px),transparent); mask-image:linear-gradient(270deg,#000 calc(100% - 34px),transparent);
+}
+body.sty-kawaii .kz.more-l.more-r .kr, body.sty-kawaii .tr-things.more-l.more-r{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 34px,#000 calc(100% - 34px),transparent); mask-image:linear-gradient(90deg,transparent,#000 34px,#000 calc(100% - 34px),transparent);
+}

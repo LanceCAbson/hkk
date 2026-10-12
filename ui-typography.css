@@ -1,0 +1,86 @@
+/* Readable interface copy. World lettering keeps its own zoom-aware scale. */
+body.sty-kawaii .p-bio,
+body.sty-kawaii .daily-brief,
+body.sty-kawaii .daily-next,
+body.sty-kawaii .daily-next b,
+body.sty-kawaii .daily-story,
+body.sty-kawaii .m-buttons .go .m-lbl span,
+body.sty-kawaii .m-pair span,
+body.sty-kawaii .board-note,
+body.sty-kawaii .board .t,
+body.sty-kawaii .cr .cr-note,
+body.sty-kawaii .cr-fine p,
+body.sty-kawaii .hint-choice .sub,
+body.sty-kawaii .vtxt,
+body.sty-kawaii .fp-sub,
+body.sty-kawaii .fp-unlock span,
+body.sty-kawaii .result-home,
+body.sty-kawaii .result-card .streak-ribbon,
+body.sty-kawaii .result-notes summary,
+body.sty-kawaii .result-card .more,
+body.sty-kawaii .all-home .ah-cue {font-size:14px;line-height:1.5}
+body.sty-kawaii .p-trait,
+body.sty-kawaii .m-tag,
+body.sty-kawaii .daily-heading p,
+body.sty-kawaii .daily-status,
+body.sty-kawaii .daily-stamps li,
+body.sty-kawaii .daily-stamps small,
+body.sty-kawaii .daily-shared,
+body.sty-kawaii .cat-stories-heading span,
+body.sty-kawaii .bookcat i,
+body.sty-kawaii .ctrait,
+body.sty-kawaii .fp-kicker,
+body.sty-kawaii .fp-count,
+body.sty-kawaii .fp-unlock b,
+body.sty-kawaii .discovery b,
+body.sty-kawaii .clue .tag,
+body.sty-kawaii .stat span,
+body.sty-kawaii .cr .cr-copy,
+body.sty-kawaii .board .pos,
+body.sty-kawaii .result-notes summary span,
+body.sty-kawaii .tr-prog {font-size:12px;line-height:1.4;letter-spacing:.025em}
+body.sty-kawaii .bookcat b {font-size:14px;line-height:1.3}
+body.sty-kawaii .lockup .sub,
+body.sty-kawaii .count,
+body.sty-kawaii #hintBtn .pen,
+body.sty-kawaii .kc.chip .kn,
+body.sty-kawaii .kc.tall .kn,
+body.sty-kawaii .kz[data-n] .kc.tall .kn,
+body.sty-kawaii .kt b,
+body.sty-kawaii .kt i,
+body.sty-kawaii .park-weather,
+body.sty-kawaii .park-search-label,
+body.sty-kawaii .park-search-label span {font-size:12px;line-height:1.35;letter-spacing:0}
+body.sty-kawaii .clue,
+body.sty-kawaii .clue button,
+body.sty-kawaii .kacts button,
+body.sty-kawaii .tallies b,
+body.sty-kawaii .tallies span,
+body.sty-kawaii .pnl dt {font-size:14px;line-height:1.4}
+body.sty-kawaii .daily-next span,
+body.sty-kawaii .daily-story,
+body.sty-kawaii .daily-shared,
+body.sty-kawaii .daily-heading p {color:#695360}
+body.sty-kawaii .daily-stamps small {font-weight:600}
+body.sty-kawaii .daily-stamps li {gap:5px}
+body.sty-kawaii .park-weather {max-width:100%;white-space:normal}
+body.sty-kawaii .result-notes summary {flex-wrap:wrap}
+body.sty-kawaii .result-notes summary span {white-space:normal}
+@media(max-width:360px){
+ body.sty-kawaii .daily-stamps{gap:3px}
+ body.sty-kawaii .daily-stamps li{padding-inline:1px;font-size:12px}
+ body.sty-kawaii .daily-stamps small{font-size:12px}
+ body.sty-kawaii .daily-heading h3{font-size:20px}
+}
+
+body.sty-kawaii .panel .eyebrow,
+body.sty-kawaii .cr .cr-kicker,
+body.sty-kawaii .c-read,
+body.sty-kawaii .c-story-label,
+body.sty-kawaii .tr-progress {font-size:12px;line-height:1.4;letter-spacing:.025em}
+body.sty-kawaii .kc.chip .kn{min-height:20px;line-height:20px}
+body.sty-kawaii .menu.tight4 .m-head{flex-grow:0}
+body.sty-kawaii .tc p {font-size:14px;line-height:1.5;letter-spacing:.02em;white-space:normal}
+body.sty-kawaii .eyebrow {font-size:12px;line-height:1.4;letter-spacing:.025em}
+body.sty-kawaii .cr .cr-role,
+body.sty-kawaii .cr .cr-as {font-size:12px;line-height:1.4;letter-spacing:.025em}
