@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kitty.abdev.co.uk/sitemap.xml
