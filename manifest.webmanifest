@@ -1,7 +1,7 @@
 {
   "name": "Here Kitty Kitty",
   "short_name": "Kitty Kitty",
-  "description": "Nine hidden cats, and a new search every day.",
+  "description": "Ten hidden cats, and a new search every day.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
