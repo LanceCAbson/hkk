@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Here Kitty Kitty</title>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bf06b497fe3e4857a7a313a78e034bb1"}'></script>
+</head>
+<body style="font:16px/1.5 system-ui,sans-serif;text-align:center;margin:3rem 1rem;color:#161616">
+<!-- Counts a cat being found, once a visit. The game loads this page unseen, so the visit counter notices; opened on its own
+     (a shared link, say) it sends the visitor to the game. -->
+<p><a id="g" href="./">Here Kitty Kitty</a></p>
+<script>
+try{ if(window.top === window.self) setTimeout(function(){ location.replace(document.getElementById("g").href) }, 600) }catch(e){}
+</script>
+</body>
+</html>
