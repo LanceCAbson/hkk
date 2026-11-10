@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.iphonegamesapps.herekittykitty",
+    "sha256_cert_fingerprints": ["BF:EE:00:79:53:C4:CE:0F:7E:E5:91:F4:5E:93:B2:C8:9A:A5:D5:40:7D:14:EA:61:11:28:57:E6:F3:FE:FC:64"]
+  }
+}]
