@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A friend invited you to Here Kitty Kitty</title>
+<title>A friend sent you a gift in Here Kitty Kitty</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="/favicon.png">
 <!-- The page an invite link opens (https://kitty.abdev.co.uk/i/?i=<number>&n=<name>). It is only a doorway: it says who sent the
@@ -44,8 +44,8 @@
 <body>
 <main>
   <img class="icon" src="/icon-192.png" alt="Here Kitty Kitty app icon" width="96" height="96">
-  <h1 id="title">A friend invited you</h1>
-  <p class="gift">Finish your first search and you each get 2 free hints.</p>
+  <h1 id="title">A friend sent you a gift</h1>
+  <p class="gift">2 free hints are waiting for you. Finish your first search to unlock them.</p>
   <p class="tag">Here Kitty Kitty is a cosy, free hidden-cat game. Ten cats are hiding, and there is a new search every day.</p>
 
   <a class="btn primary"   id="open"  href="#">Open in the game</a>
@@ -71,7 +71,7 @@
     title.textContent = 'Here Kitty Kitty';
     document.querySelector('.gift').style.display = 'none';
   } else if (who) {
-    title.textContent = who + ' invited you';
+    title.textContent = who + ' sent you a gift';
   }
   document.title = title.textContent;
 
