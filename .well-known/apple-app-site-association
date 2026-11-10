@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["X3DN7BRYD5.com.iphonegamesapps.herekittykitty"],
+        "components": [
+          { "/": "/i/*", "comment": "An invite from a friend" }
+        ]
+      }
+    ]
+  }
+}

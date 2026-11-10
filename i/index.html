@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A friend invited you to Here Kitty Kitty</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- The page an invite link opens (https://kitty.abdev.co.uk/i/?i=<number>&n=<name>). It is only a doorway: it says who sent the
+     link and hands the friend on to the store. The game is not played here. "Get the game" first copies the link to the clipboard,
+     which is how the invite survives the install: the game reads it once, on its very first launch (design/INVITES.md). With the game
+     installed, Android and iPhone open the link in the game itself and never show this page, and "Open in the game" uses the
+     herekittykitty:// scheme where they did not. The preview tags are generic because crawlers do not run the script below. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Here Kitty Kitty">
+<meta property="og:title" content="Come and find the cats with me">
+<meta property="og:description" content="Ten cats are hiding, and there is a new search every day. Free on iPhone and Android.">
+<meta property="og:image" content="https://kitty.abdev.co.uk/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFF4DC">
+<style>
+  :root { --ink:#2B2430; --muted:#6F6577; --accent:#E0455F; --panel:#FFFBF1; --edge:#EAD9B6; --ground:#FFF4DC; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--ground); color: var(--ink); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         min-height: 100vh; display: grid; place-items: center; padding: 28px 20px 40px; }
+  main { width: 100%; max-width: 420px; background: var(--panel); border: 1px solid var(--edge); border-radius: 22px; padding: 32px 28px 28px;
+         text-align: center; box-shadow: 0 1px 2px rgba(43,36,48,.05), 0 12px 32px rgba(43,36,48,.08); }
+  .icon { width: 96px; height: 96px; border-radius: 22px; display: block; margin: 0 auto 16px; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.01em; overflow-wrap: anywhere; }
+  .gift { color: var(--accent); font-weight: 700; font-size: 17px; margin: 0 0 8px; }
+  .tag { color: var(--muted); margin: 0 0 24px; }
+  a.btn { display: block; padding: 15px 18px; border-radius: 999px; text-decoration: none; font-weight: 700; letter-spacing: .02em; margin-bottom: 12px; }
+  a.primary { background: var(--accent); color: #fff; }
+  a.secondary { background: transparent; color: var(--ink); border: 2px solid var(--edge); }
+  .note { color: var(--muted); font-size: 14px; margin: 16px 0 0; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#F7EFE0; --muted:#BDB1C2; --panel:#2A2330; --edge:#443A4D; --ground:#1E1922; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <img class="icon" src="/icon-192.png" alt="Here Kitty Kitty app icon" width="96" height="96">
+  <h1 id="title">A friend invited you</h1>
+  <p class="gift">Finish your first search and you each get 2 free hints.</p>
+  <p class="tag">Here Kitty Kitty is a cosy, free hidden-cat game. Ten cats are hiding, and there is a new search every day.</p>
+
+  <a class="btn primary"   id="open"  href="#">Open in the game</a>
+  <a class="btn secondary" id="store" href="#">Get the game</a>
+
+  <p class="note" id="note">New to Here Kitty Kitty? Tap "Get the game", then open it. It is free on iPhone and Android.</p>
+</main>
+
+<script>
+(function () {
+  var APPLE_ID = '6813514866';
+  var PLAY_PKG = 'com.iphonegamesapps.herekittykitty';
+
+  var q = location.search || '';
+  var m = /(?:^|[?&])i=(\d{1,10})(?:&|$)/.exec(q);
+  var id = m ? m[1] : '';
+  var n = /(?:^|[?&])n=([^&]*)/.exec(q), who = '';
+  if (n) { try { who = decodeURIComponent(n[1].replace(/\+/g, ' ')); } catch (e) {} who = who.replace(/[^A-Za-z0-9 _.\-]/g, '').trim().slice(0, 16); }
+
+  var title = document.getElementById('title');
+  if (!id) {
+    // not an invite at all: still a doorway to the game
+    title.textContent = 'Here Kitty Kitty';
+    document.querySelector('.gift').style.display = 'none';
+  } else if (who) {
+    title.textContent = who + ' invited you';
+  }
+  document.title = title.textContent;
+
+  var src = 'friend_invite';
+  var appleUrl = 'https://apps.apple.com/app/id' + APPLE_ID + '?ct=' + src + '&mt=8';
+  var playUrl = 'https://play.google.com/store/apps/details?id=' + PLAY_PKG +
+                '&referrer=' + encodeURIComponent('utm_source=' + src + '&utm_medium=share&utm_campaign=invite');
+
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/.test(ua);
+
+  var open = document.getElementById('open'), store = document.getElementById('store');
+  // "Open in the game" uses the custom scheme: it works when the https link was not handed to the game (the game opens, or nothing happens).
+  open.href = 'herekittykitty://i/' + (id ? '?i=' + id + (who ? '&n=' + encodeURIComponent(who) : '') : '');
+  store.href = isAndroid ? playUrl : appleUrl;
+  if (!isIOS && !isAndroid) {
+    open.style.display = 'none';
+    document.getElementById('note').textContent = 'Open this link on your phone. Here Kitty Kitty is free on iPhone and Android.';
+  }
+
+  // The game reads this link from the clipboard on its very first launch, which is how a link survives the install.
+  store.addEventListener('click', function () {
+    if (!id) return;
+    try { navigator.clipboard.writeText(location.href); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
