@@ -4,7 +4,8 @@
       {
         "appIDs": ["X3DN7BRYD5.com.iphonegamesapps.herekittykitty"],
         "components": [
-          { "/": "/i/*", "comment": "An invite from a friend" }
+          { "/": "/i/*", "comment": "An invite from a friend" },
+          { "/": "/d/*", "comment": "A cat to find, sent by a friend" }
         ]
       }
     ]

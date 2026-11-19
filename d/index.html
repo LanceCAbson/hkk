@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Here Kitty Kitty</title>
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Here Kitty Kitty">
+<meta property="og:title" content="Can you spot the cat?">
+<meta property="og:description" content="A friend sent you a cat to find. Free on iPhone and Android.">
+<meta property="og:image" content="https://kitty.abdev.co.uk/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<!-- A friend's puzzle link: https://kitty.abdev.co.uk/d/?k=spot&d=<day>&c=<cat>... With the game installed, Android App Links and iPhone
+     Universal Links open it in the game and this page is never shown (web/.well-known). Without it, this hands the same query on to the
+     browser game at the root, which plays the one-cat search. Link previews read the tags above, since crawlers do not run the script. -->
+<script>location.replace("/" + (location.search || "") + (location.hash || ""))</script>
+<noscript><meta http-equiv="refresh" content="0; url=/"></noscript>
+</head>
+<body style="background:#FFF4DC;font:16px -apple-system,sans-serif;text-align:center;padding:40px 20px">
+<p><a href="/">Here Kitty Kitty</a></p>
+</body>
+</html>
